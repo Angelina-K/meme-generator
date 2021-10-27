@@ -16,7 +16,11 @@ body {
 .flex-column {
   flex-direction: column;
 }
-
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(20px, 1fr));
+  grid-auto-rows: 20px;
+}
 .main-content {
   max-width: 90%;
   height: 90vh;
@@ -26,16 +30,20 @@ body {
   justify-content: center;
   border: 1px solid grey;
 }
-.container {
+.main-container {
+  max-width: 90%;
   gap: 50px;
 }
 
-.input,
+.inputs-container,
 .output {
-  width: 30rem;
-  height: 30rem;
+  width: 25em;
+  height: 25em;
   /* border-radius: 10px; */
   /* background-color: #fafbdc8f; */
   border: 1px solid rgb(29, 28, 28);
   /* color: #72655e; */
+}
+.inputs-content {
+  padding: 1em;
 }
