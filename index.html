@@ -20,16 +20,22 @@
               placeholder="Write Something"
             />
             <div class="text-editor grid">
-              <button
-                class="btn text-editor-btn"
-                onclick="onChangeFontSize(1)"
-                style="background-image: url(img/A+.png)"
-              ></button>
+              <button class="btn text-editor-btn" onclick="onChangeFontSize(1)">
+                <img src="img/A+.png" alt="" />
+              </button>
               <button
                 class="btn text-editor-btn"
                 onclick="onChangeFontSize(-1)"
-                style="background-image: url(img/A-.png)"
-              ></button>
+              >
+                <img src="img/A-.png" alt="" />
+              </button>
+              <button class="btn text-editor-btn" onclick="onSelectText()">
+                <img src="img/up.png" alt="" />
+                <img src="img/down.png" alt="" />
+              </button>
+              <button class="btn text-editor-btn" onclick="onAddLine()">
+                <img src="img/+.png" alt="" />
+              </button>
             </div>
           </div>
         </section>

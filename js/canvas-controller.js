@@ -14,11 +14,10 @@ function changeCanvasContent() {
     gCtx.fillStyle = pattern;
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
 
-    drawText();
+    // drawText();
   };
   // clearCanvas();
   // renderCanvas();
-  // gCtx.save();
   // clearCanvas();
 
   // drawText();
@@ -40,37 +39,40 @@ function resizeCanvas() {
   // drawText();
 }
 
-function drawImg(imgId) {
-  // const meme = getCurrMeme();
-  // if (!meme.selectedImgId) return;
-  // console.log('meme.selectedImgId', meme.selectedImgId);
-  let img = new Image();
-  img.src = `img/${imgId}.jpg`;
-  img.onload = () => {
-    // gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height); //img,x,y,xend,yend
-    var pattern = gCtx.createPattern(img, 'repeat');
-    gCtx.fillStyle = pattern;
-    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
-    drawText();
-  };
-}
+// function drawImg(imgId) {
+//   // const meme = getCurrMeme();
+//   // if (!meme.selectedImgId) return;
+//   // console.log('meme.selectedImgId', meme.selectedImgId);
+//   let img = new Image();
+//   img.src = `img/${imgId}.jpg`;
+//   img.onload = () => {
+//     // gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height); //img,x,y,xend,yend
+//     var pattern = gCtx.createPattern(img, 'repeat');
+//     gCtx.fillStyle = pattern;
+//     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
+//     drawText();
+//   };
+// }
 
 function drawText() {
-  // clearCanvas();
-  // drawImg(1);
-
-  console.log('drawText');
+  gCtx.restore();
   const meme = getCurrMeme();
 
-  const { txt, size } = meme.lines[0];
-  console.log('drawText', txt, size);
+  const currLineIdx = getCurrLine();
+  const { txt, size } = meme.lines[currLineIdx];
+  let x = 20;
+  let y = 50;
+  if (currLineIdx === 1) {
+    // x = gElCanvas.width - 20;
+    y = gElCanvas.width - 50;
+  }
   gCtx.lineWidth = 1.5;
   gCtx.strokeStyle = 'white';
   gCtx.fillStyle = 'black';
   gCtx.font = `${size}px Impact`;
-  gCtx.fillText(`${txt}`, 20, 50);
-  gCtx.strokeText(`${txt}`, 20, 50);
-  console.log(' from drawText', meme);
+  gCtx.fillText(`${txt}`, x, y);
+  gCtx.strokeText(`${txt}`, x, y);
+
   gCtx.save();
   // gCtx.font = '48px serif';
   // gCtx.fillText(text, x, y);

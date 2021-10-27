@@ -1,6 +1,7 @@
 'use strict';
 // let gKeywords = {'happy': 12,'funny puk': 1}
 let gMems = [];
+let gCurrLineIdx = 0;
 
 let gImgs = [
   { id: 1, url: 'img/1.jpg', keywords: ['Lazy'] },
@@ -19,9 +20,19 @@ let gMeme = {
     },
   ],
 };
+
+function createTxtLine(txt = '') {
+  const line = {
+    txt,
+    size: 20,
+    align: 'left',
+    color: 'red',
+  };
+  gMeme.lines.push(line);
+  gCurrLineIdx++;
+}
 function changeFontSize(sign) {
-  gMeme.lines[0].size += sign;
-  console.log(gMeme.lines[0].size);
+  gMeme.lines[gCurrLineIdx].size += sign;
 }
 function updateMemeImg(imgId) {
   gMeme.selectedImgId = imgId;
@@ -29,10 +40,17 @@ function updateMemeImg(imgId) {
 }
 
 function updateMemeTxt(txt) {
-  // let meme= getCurrMeme()
-  gMeme.lines[0].txt = txt;
+  // gMeme.lines[0].txt = txt;
+  gMeme.lines[gCurrLineIdx].txt = txt;
+  console.log('gCurrLineIdx', gCurrLineIdx, gMeme.lines[gCurrLineIdx]);
 }
+// function addNewLine(){
+//   gCurrLineIdx++
+// }
 
+function getCurrLine() {
+  return gCurrLineIdx;
+}
 function getCurrMeme() {
   return gMeme;
 }
