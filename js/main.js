@@ -1,6 +1,5 @@
 'use strict';
 function onInit() {
-  console.log('into rendercanvas');
   renderCanvas();
   console.log('rendered canvas from init');
 
@@ -12,4 +11,5 @@ function onInit() {
     // drawText('changed' + Date.now(), 0, 225)
   });
   //   drawImgFromlocal();
+  //   changeCanvasContent();
 }
