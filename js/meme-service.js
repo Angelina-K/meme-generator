@@ -2,7 +2,10 @@
 // let gKeywords = {'happy': 12,'funny puk': 1}
 let gMems = [];
 
-let gImgs = [{ id: 1, url: 'img/1.jpg', keywords: ['Lazy'] }];
+let gImgs = [
+  { id: 1, url: 'img/1.jpg', keywords: ['Lazy'] },
+  { id: 2, url: 'img/2.jpg', keywords: ['Cute'] },
+];
 
 let gMeme = {
   selectedImgId: 1,
@@ -16,6 +19,10 @@ let gMeme = {
     },
   ],
 };
+function updateMemeImg(imgId) {
+  gMeme.selectedImgId = imgId;
+  console.log('gMeme.selectedImgId', gMeme.selectedImgId);
+}
 
 function updateMemeTxt(txt) {
   // let meme= getCurrMeme()
@@ -23,8 +30,10 @@ function updateMemeTxt(txt) {
 }
 
 function getCurrMeme() {
-  console.log(gMeme);
   return gMeme;
+}
+function getAllImgs() {
+  return gImgs;
 }
 
 function createMeme() {

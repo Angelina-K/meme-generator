@@ -31,6 +31,21 @@ body {
   justify-content: center;
   border: 1px solid grey;
 }
+.img {
+  width: 100px;
+  height: 100px;
+  background-position: center center;
+  background-size: cover;
+  /* height: 100%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0.8;
+}
+.img:hover {
+  opacity: 1;
+}
 .main-container {
   max-width: 90%;
   gap: 50px;
