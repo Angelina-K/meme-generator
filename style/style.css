@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  /* background: url(../img/bg.jpg) no-repeat center center fixed;
+  background-size: cover; */
+  background-color: #fff;
+}
+
+/* HELPERS */
+.flex {
+  display: flex;
+}
+.flex-column {
+  flex-direction: column;
+}
+
+.main-content {
+  max-width: 90%;
+  height: 90vh;
+  margin: auto;
+  margin: 2rem auto;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid grey;
+}
+.container {
+  gap: 50px;
+}
+
+.input,
+.output {
+  width: 30rem;
+  height: 30rem;
+  /* border-radius: 10px; */
+  /* background-color: #fafbdc8f; */
+  border: 1px solid rgb(29, 28, 28);
+  /* color: #72655e; */
+}
