@@ -6,7 +6,7 @@ let gCtx;
 function changeCanvasContent() {
   renderCanvas();
   const meme = getCurrMeme();
-  drawImg(meme.selectedImgId);
+  // drawImg(meme.selectedImgId);
   drawText(meme.lines[0].txt);
 }
 
@@ -29,12 +29,14 @@ function resizeCanvas() {
   // drawText();
 }
 
-function drawImg(selectedImgId) {
+function drawImg(imgId) {
   // console.log('drawing img');
   // console.log('meme', meme);
   // const meme = getCurrMeme();
+  // if (!meme.selectedImgId) return;
+  // console.log('meme.selectedImgId', meme.selectedImgId);
   let img = new Image();
-  img.src = `img/${selectedImgId}.jpg`;
+  img.src = `img/${imgId}.jpg`;
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height); //img,x,y,xend,yend
   };

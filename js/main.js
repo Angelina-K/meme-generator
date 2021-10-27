@@ -1,8 +1,8 @@
 'use strict';
 function onInit() {
   renderGallery();
-  // renderCanvas();
-  console.log('rendered canvas from init');
+  renderCanvas();
+  // console.log('rendered canvas from init');
 
   window.addEventListener('resize', resizeCanvas);
   window.addEventListener('resize', () => {

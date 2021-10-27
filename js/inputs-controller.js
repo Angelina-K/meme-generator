@@ -2,7 +2,8 @@
 
 function onSelectImg(imgId) {
   updateMemeImg(imgId);
-  changeCanvasContent();
+  //   changeCanvasContent();
+  drawImg(imgId);
 }
 
 function onTypeTxt(txt) {

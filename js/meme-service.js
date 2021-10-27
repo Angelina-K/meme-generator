@@ -8,7 +8,7 @@ let gImgs = [
 ];
 
 let gMeme = {
-  selectedImgId: 1,
+  selectedImgId: 0,
   selectedLineIdx: 0,
   lines: [
     {
