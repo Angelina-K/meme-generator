@@ -25,3 +25,8 @@ function renderGallery() {
   });
   elGallery.innerHTML = srtHtml;
 }
+
+// IF TIME PERMITS clean HTML
+// function renderBtns(){
+
+// }

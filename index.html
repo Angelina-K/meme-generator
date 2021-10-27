@@ -9,9 +9,7 @@
   </head>
   <body onload="onInit()">
     <section class="main-content flex">
-      <section class="image-gallery">
-        <!-- <div class="img" onclick="onSelectImg()" style="background-image: url(img/1.jpg)"></div> -->
-      </section>
+      <section class="image-gallery"></section>
       <div class="main-container flex">
         <section class="inputs-container flex flex-column">
           <div class="inputs-content grid">
@@ -21,6 +19,18 @@
               oninput="onTypeTxt(this.value)"
               placeholder="Write Something"
             />
+            <div class="text-editor grid">
+              <button
+                class="btn text-editor-btn"
+                onclick="onChangeFontSize(1)"
+                style="background-image: url(img/A+.png)"
+              ></button>
+              <button
+                class="btn text-editor-btn"
+                onclick="onChangeFontSize(-1)"
+                style="background-image: url(img/A-.png)"
+              ></button>
+            </div>
           </div>
         </section>
         <div class="output">

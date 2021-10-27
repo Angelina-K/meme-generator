@@ -19,6 +19,10 @@ let gMeme = {
     },
   ],
 };
+function changeFontSize(sign) {
+  gMeme.lines[0].size += sign;
+  console.log(gMeme.lines[0].size);
+}
 function updateMemeImg(imgId) {
   gMeme.selectedImgId = imgId;
   console.log('gMeme.selectedImgId', gMeme.selectedImgId);

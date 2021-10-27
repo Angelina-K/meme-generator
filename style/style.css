@@ -66,6 +66,10 @@ body {
   background-color: hotpink;
   grid-column: 1/-1;
 }
+.btn {
+  background-position: center center;
+  background-size: cover;
+}
 
 .output {
   width: 400px;
