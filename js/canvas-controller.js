@@ -15,6 +15,8 @@ function changeCanvasContent() {
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
 
     drawText();
+    // console.log(getCurrLineIdx());
+    if (meme.lines[getCurrLineIdx()].isFocus) focusOnLine();
   };
   // clearCanvas();
   // renderCanvas();
@@ -75,7 +77,23 @@ function drawText() {
   // gCtx.save();
   // gCtx.font = '48px serif';
 }
+function focusOnLine() {
+  drawRect();
+}
+function drawRect(x, y) {
+  console.log('drawing ract');
+  console.log(
+    'gMeme.lines[gCurrLineIdx].isFocus',
+    gMeme.lines[gCurrLineIdx].isFocus
+  );
 
+  gCtx.beginPath();
+  gCtx.rect(20, 50, 50, 100);
+  gCtx.fillStyle = 'orange';
+  gCtx.fillRect(20, 50, 50, 100);
+  gCtx.strokeStyle = 'black';
+  gCtx.stroke();
+}
 function clearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
   // drawImg(1);

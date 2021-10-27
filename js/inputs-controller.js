@@ -16,11 +16,18 @@ function onChangeFontSize(sign) {
   changeCanvasContent();
 }
 function onAddLine() {
-  console.log('onAddLine');
-  let elPlaceHolder = document.querySelector('.text-input');
-  elPlaceHolder.value = elPlaceHolder.ariaPlaceholder;
+  clearPlaceholder();
+  unfocusLine();
   createTxtLine();
+  changeCanvasContent();
 }
 function onSelectText() {
-  console.log('onSelectText');
+  setLineOnFocus();
+  focusOnLine();
+  changeCanvasContent();
+}
+
+function clearPlaceholder() {
+  let elPlaceHolder = document.querySelector('.text-input');
+  elPlaceHolder.value = elPlaceHolder.ariaPlaceholder;
 }
