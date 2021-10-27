@@ -14,7 +14,7 @@ function changeCanvasContent() {
     gCtx.fillStyle = pattern;
     gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
 
-    // drawText();
+    drawText();
   };
   // clearCanvas();
   // renderCanvas();
@@ -55,27 +55,25 @@ function resizeCanvas() {
 // }
 
 function drawText() {
-  gCtx.restore();
   const meme = getCurrMeme();
+  meme.lines.forEach((line, idx) => {
+    const { txt, size } = meme.lines[idx];
+    let x = 20;
+    let y = 50;
+    if (idx === 1) {
+      y = gElCanvas.width - 50;
+    }
+    gCtx.lineWidth = 1.5;
+    gCtx.strokeStyle = 'white';
+    gCtx.fillStyle = 'black';
+    gCtx.font = `${size}px Impact`;
+    gCtx.fillText(`${txt}`, x, y);
+    gCtx.strokeText(`${txt}`, x, y);
+  });
+  // const currLineIdx = getCurrLine();
 
-  const currLineIdx = getCurrLine();
-  const { txt, size } = meme.lines[currLineIdx];
-  let x = 20;
-  let y = 50;
-  if (currLineIdx === 1) {
-    // x = gElCanvas.width - 20;
-    y = gElCanvas.width - 50;
-  }
-  gCtx.lineWidth = 1.5;
-  gCtx.strokeStyle = 'white';
-  gCtx.fillStyle = 'black';
-  gCtx.font = `${size}px Impact`;
-  gCtx.fillText(`${txt}`, x, y);
-  gCtx.strokeText(`${txt}`, x, y);
-
-  gCtx.save();
+  // gCtx.save();
   // gCtx.font = '48px serif';
-  // gCtx.fillText(text, x, y);
 }
 
 function clearCanvas() {
