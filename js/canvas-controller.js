@@ -16,7 +16,7 @@ function changeCanvasContent() {
 
     drawText();
     // console.log(getCurrLineIdx());
-    if (meme.lines[getCurrLineIdx()].isFocus) focusOnLine();
+    // if (meme.lines[getCurrLineIdx()].isFocus) focusOnLine();
   };
   // clearCanvas();
   // renderCanvas();
@@ -81,12 +81,8 @@ function focusOnLine() {
   drawRect();
 }
 function drawRect(x, y) {
-  console.log('drawing ract');
-  console.log(
-    'gMeme.lines[gCurrLineIdx].isFocus',
-    gMeme.lines[gCurrLineIdx].isFocus
-  );
-
+  console.log('focus on:', gCurrLineIdx);
+  console.log('drawRect', gMeme.lines);
   gCtx.beginPath();
   gCtx.rect(20, 50, 50, 100);
   gCtx.fillStyle = 'orange';

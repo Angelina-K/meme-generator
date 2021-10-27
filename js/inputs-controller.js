@@ -9,6 +9,7 @@ function onTypeTxt(txt) {
   updateMemeTxt(txt);
   // createTxtLine(txt);
   changeCanvasContent();
+  // focusOnLine();
 }
 
 function onChangeFontSize(sign) {
@@ -16,16 +17,30 @@ function onChangeFontSize(sign) {
   changeCanvasContent();
 }
 function onAddLine() {
-  clearPlaceholder();
-  unfocusLine();
   createTxtLine();
+  // toggleLineFocus();
+  clearPlaceholder();
+  // unfocusLine();
   changeCanvasContent();
 }
-function onSelectText() {
-  setLineOnFocus();
-  focusOnLine();
-  changeCanvasContent();
+function onSelectLine() {
+  changeLineFocus();
+  const meme = getCurrMeme();
+  if (meme.lines[getCurrLineIdx()].isFocus) {
+    focusOnLine();
+  } else {
+    changeCanvasContent();
+  }
 }
+
+// toggleLineFocus();
+// const meme = getCurrMeme();
+// if (meme.lines[getCurrLineIdx()].isFocus) {
+//   focusOnLine();
+// } else {
+//   changeCanvasContent();
+// }
+// changeCanvasContent();
 
 function clearPlaceholder() {
   let elPlaceHolder = document.querySelector('.text-input');
