@@ -2,17 +2,31 @@
 function onInit() {
   renderGallery();
   renderCanvas();
-  // console.log('rendered canvas from init');
+  addListeners();
 
   window.addEventListener('resize', resizeCanvas);
   window.addEventListener('resize', () => {
     console.log('resized');
     resizeCanvas();
-
-    // drawText('changed' + Date.now(), 0, 225)
   });
-  //   drawImg();
-  //   changeCanvasContent();
+}
+
+function addListeners() {
+  const elCanvas = getCanvas();
+  addMouseListeners(elCanvas);
+  // addTouchListeners();
+}
+
+function addMouseListeners(elCanvas) {
+  elCanvas.addEventListener('mousemove', onMove);
+  elCanvas.addEventListener('mousedown', onDown);
+  elCanvas.addEventListener('mouseup', onUp);
+}
+
+function addTouchListeners() {
+  gElCanvas.addEventListener('touchmove', onMove);
+  gElCanvas.addEventListener('touchstart', onDown);
+  gElCanvas.addEventListener('touchend', onUp);
 }
 
 function renderGallery() {

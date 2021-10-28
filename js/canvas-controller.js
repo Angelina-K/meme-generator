@@ -2,19 +2,10 @@
 
 let gElCanvas;
 let gCtx;
-// let gLineWidthByIdx = [];
 
-// function getTextPose() {
-//   const currLineIdx = getCurrLineIdx();
-//   let x = 20;
-//   let y;
-//   if (currLineIdx === 0) y = 50;
-//   if (currLineIdx === 1) y = gElCanvas.height - 50;
-//   if (currLineIdx === 2) y = gElCanvas.height / 2;
-//   if (currLineIdx > 2) y = gElCanvas.height / 2 + 30;
-
-//   return y;
-// }
+function getCanvas() {
+  return gElCanvas;
+}
 function getTextPose(idx) {
   // const currLineIdx = getCurrLineIdx();
   let x = 20;
@@ -83,17 +74,25 @@ function resizeCanvas() {
 // }
 
 function drawText() {
+  let x = 20;
+  let y;
   const meme = getCurrMeme();
   meme.lines.forEach((line, idx) => {
     const { txt, size } = meme.lines[idx];
-    let y = getTextPose(idx);
-
+    if (!meme.lines[idx].pos) {
+      console.log('!line.pos');
+      y = getTextPose(idx);
+    } else {
+      // const { x, y } = line.pos;
+      x = line.pos.x;
+      y = line.pos.y;
+    }
     gCtx.lineWidth = 1.5;
     gCtx.strokeStyle = 'white';
     gCtx.fillStyle = 'black';
     gCtx.font = `${size}px Impact`;
-    gCtx.fillText(txt, 20, y);
-    gCtx.strokeText(txt, 20, y);
+    gCtx.fillText(txt, x, y);
+    gCtx.strokeText(txt, x, y);
 
     const lineWidth = gCtx.measureText(txt).width;
     updateLineWidth(lineWidth, idx);
@@ -116,17 +115,29 @@ function drawRect() {
   const txtSize = meme.lines[idx].size;
   const lineWidth = meme.lines[idx].lineWidth;
 
-  const x = 20;
-  const y = getTextPose(idx);
-
-  console.log('idx from draw rect', idx);
-  console.log(gMeme.lines[idx]);
+  let x = 20;
+  let y = getTextPose(idx);
+  if (meme.lines[idx].pos) {
+    x = meme.lines[idx].pos.x;
+    y = meme.lines[idx].pos.y;
+  }
   gCtx.beginPath();
   gCtx.rect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
   gCtx.fillStyle = '#ffffff00';
 
   gCtx.stroke();
+  const boxBoundaries = {
+    x: x - 10,
+    y: y - 25,
+    xWidth: lineWidth + 20 + x,
+    yHight: y + txtSize + 20,
+  };
+  const txtPos = { x: x, y: y };
+  console.log('TxtPos', txtPos);
+  saveTextPos(txtPos);
+  saveBoxSize(idx, boxBoundaries);
 }
+
 function clearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
   // drawImg(1);

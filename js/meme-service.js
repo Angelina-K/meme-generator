@@ -13,12 +13,15 @@ let gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
+      pos: 0,
       txt: '',
       size: 20,
       align: 'left',
       color: 'red',
-      isFocus: true,
       lineWidth: 0,
+      isFocus: true,
+      boxBoundaries: 0,
+      isDrag: false,
     },
   ],
 };
@@ -27,46 +30,66 @@ function createTxtLine(txt = '') {
   gMeme.lines[gCurrLineIdx].isFocus = false;
 
   const line = {
+    pos: 0,
     txt,
     size: 20,
     align: 'left',
     color: 'red',
-    isFocus: true,
     lineWidth: 0,
+    isFocus: true,
+    boxBoundaries: 0,
+    isDrag: false,
   };
   gMeme.lines.push(line);
   gCurrLineIdx++;
   // console.log('afret createline', gCurrLineIdx);
 }
 
+function saveTextPos(txtPos) {
+  gMeme.lines[gCurrLineIdx].pos = txtPos;
+  console.log('gMeme.lines[gCurrLineIdx].pos', gMeme.lines[gCurrLineIdx].pos);
+}
+
+function saveBoxSize(idx, boxBoundaries) {
+  gMeme.lines[idx].boxBoundaries = boxBoundaries;
+  console.log(gMeme.lines[idx].boxBoundaries);
+}
+
+function moveLine(dx, dy) {
+  gMeme.lines[gCurrLineIdx].pos.x += dx;
+  gMeme.lines[gCurrLineIdx].pos.y += dy;
+  console.log('gMeme.lines new pos', gMeme.lines);
+}
+
+function isLineClicked(clickedPos) {
+  if (!gMeme.lines[gCurrLineIdx].isFocus) {
+    console.log('isFocus:', false);
+    return false;
+  }
+  const { boxBoundaries } = gMeme.lines[gCurrLineIdx];
+
+  if (
+    clickedPos.x >= boxBoundaries.x &&
+    clickedPos.x <= boxBoundaries.xWidth &&
+    clickedPos.y >= boxBoundaries.y &&
+    clickedPos.y <= boxBoundaries.yHight
+  ) {
+    console.log('line clicked');
+    return true;
+  } else {
+    console.log('no line clicked');
+    return false;
+  }
+}
+
+function setLineDrag(isDrag) {
+  gMeme.lines[gCurrLineIdx].isDrag = isDrag;
+}
+
 function updateLineWidth(lineWidth, idx) {
   gMeme.lines[idx].lineWidth = lineWidth;
   // console.log('gMeme', gMeme.lines[gCurrLineIdx]);
 }
-
-// function checkFocusStatus(){
-//   let isFocus=gMeme.lines[gCurrLineIdx].isFocus
-//   if (!isFocus){
-//     isFocus=true
-//     return true
-//   }else{
-//     isFocus=false
-
-//   }
-
-// function toggleLineFocus() {
-//   // console.log('toggle func',gCurrLineIdx,gMeme.lines[gCurrLineIdx].isFocus);
-//   gMeme.lines[gCurrLineIdx].isFocus = !gMeme.lines[gCurrLineIdx].isFocus;
-//   console.log('toggle func', gMeme.lines);
-// }
-// if (!gMeme.lines[gCurrLineIdx].isFocus) {
-//   gCurrLineIdx =
-//     gCurrLineIdx + 1 > gMeme.lines.length - 1 ? 0 : gCurrLineIdx++;
-//   // gCurrLineIdx++;
-//   gMeme.lines[gCurrLineIdx].isFocus = !gMeme.lines[gCurrLineIdx].isFocus;
-// }
-// console.log('gCurrLineIdx', gCurrLineIdx);
-// console.log(gCurrLineIdx, 'isFocus', gMeme.lines[gCurrLineIdx].isFocus);
 
 function changeLineFocus() {
   if (gMeme.lines.length <= 1) {

@@ -1,5 +1,6 @@
 'use strict';
 let gStartPos;
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onSelectImg(imgId) {
   updateMemeImg(imgId);
@@ -39,14 +40,14 @@ function getEvPos(ev) {
     x: ev.offsetX,
     y: ev.offsetY,
   };
-  // if (gTouchEvs.includes(ev.type)) {
-  //   ev.preventDefault();
-  //   ev = ev.changedTouches[0];
-  //   pos = {
-  //     x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-  //     y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
-  //   };
-  // }
+  if (gTouchEvs.includes(ev.type)) {
+    ev.preventDefault();
+    ev = ev.changedTouches[0];
+    pos = {
+      x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+      y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+    };
+  }
   return pos;
 }
 
@@ -56,22 +57,25 @@ function onDown(ev) {
   if (!isLineClicked(pos)) return;
   setLineDrag(true);
   gStartPos = pos;
-  // document.body.style.cursor = 'grabbing';
+  document.body.style.cursor = 'grabbing';
+  // console.log('grabbing');
 }
 
 function onMove(ev) {
-  const circle = getCircle();
-  if (circle.isDrag) {
+  const idx = getCurrLineIdx();
+  const meme = getCurrMeme();
+  const memeLine = meme.lines[idx];
+  if (memeLine.isDrag) {
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;
     gStartPos = pos;
-    moveCircle(dx, dy);
-    renderCanvas();
+    moveLine(dx, dy);
+    changeCanvasContent();
   }
 }
 
 function onUp() {
   setLineDrag(false);
-  // document.body.style.cursor = 'grab';
+  document.body.style.cursor = 'auto';
 }
