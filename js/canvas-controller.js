@@ -2,6 +2,30 @@
 
 let gElCanvas;
 let gCtx;
+// let gLineWidthByIdx = [];
+
+// function getTextPose() {
+//   const currLineIdx = getCurrLineIdx();
+//   let x = 20;
+//   let y;
+//   if (currLineIdx === 0) y = 50;
+//   if (currLineIdx === 1) y = gElCanvas.height - 50;
+//   if (currLineIdx === 2) y = gElCanvas.height / 2;
+//   if (currLineIdx > 2) y = gElCanvas.height / 2 + 30;
+
+//   return y;
+// }
+function getTextPose(idx) {
+  // const currLineIdx = getCurrLineIdx();
+  let x = 20;
+  let y;
+  if (idx === 0) y = 50;
+  if (idx === 1) y = gElCanvas.height - 50;
+  if (idx === 2) y = gElCanvas.height / 2;
+  if (idx > 2) y = gElCanvas.height / 2 + 30;
+
+  return y;
+}
 
 function changeCanvasContent() {
   const meme = getCurrMeme();
@@ -16,7 +40,9 @@ function changeCanvasContent() {
 
     drawText();
     // console.log(getCurrLineIdx());
-    // if (meme.lines[getCurrLineIdx()].isFocus) focusOnLine();
+    const currLineIdx = getCurrLineIdx();
+    if (meme.lines[currLineIdx].isFocus && meme.lines[currLineIdx].txt)
+      focusOnLine();
   };
   // clearCanvas();
   // renderCanvas();
@@ -60,17 +86,19 @@ function drawText() {
   const meme = getCurrMeme();
   meme.lines.forEach((line, idx) => {
     const { txt, size } = meme.lines[idx];
-    let x = 20;
-    let y = 50;
-    if (idx === 1) {
-      y = gElCanvas.width - 50;
-    }
+    let y = getTextPose(idx);
+
     gCtx.lineWidth = 1.5;
     gCtx.strokeStyle = 'white';
     gCtx.fillStyle = 'black';
     gCtx.font = `${size}px Impact`;
-    gCtx.fillText(`${txt}`, x, y);
-    gCtx.strokeText(`${txt}`, x, y);
+    gCtx.fillText(txt, 20, y);
+    gCtx.strokeText(txt, 20, y);
+
+    const lineWidth = gCtx.measureText(txt).width;
+    updateLineWidth(lineWidth, idx);
+    // gLineWidthByIdx.push(txtWidth);
+    // console.log(txtWidth);
   });
   // const currLineIdx = getCurrLine();
 
@@ -80,14 +108,23 @@ function drawText() {
 function focusOnLine() {
   drawRect();
 }
-function drawRect(x, y) {
-  console.log('focus on:', gCurrLineIdx);
-  console.log('drawRect', gMeme.lines);
+
+function drawRect() {
+  const idx = getCurrLineIdx();
+  // console.log('currlineIDX', idx);
+  const meme = getCurrMeme();
+  const txtSize = meme.lines[idx].size;
+  const lineWidth = meme.lines[idx].lineWidth;
+
+  const x = 20;
+  const y = getTextPose(idx);
+
+  console.log('idx from draw rect', idx);
+  console.log(gMeme.lines[idx]);
   gCtx.beginPath();
-  gCtx.rect(20, 50, 50, 100);
-  gCtx.fillStyle = 'orange';
-  gCtx.fillRect(20, 50, 50, 100);
-  gCtx.strokeStyle = 'black';
+  gCtx.rect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
+  gCtx.fillStyle = '#ffffff00';
+
   gCtx.stroke();
 }
 function clearCanvas() {

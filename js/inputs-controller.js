@@ -25,12 +25,12 @@ function onAddLine() {
 }
 function onSelectLine() {
   changeLineFocus();
-  const meme = getCurrMeme();
-  if (meme.lines[getCurrLineIdx()].isFocus) {
-    focusOnLine();
-  } else {
-    changeCanvasContent();
-  }
+  changeCanvasContent();
+  // if (meme.lines[getCurrLineIdx()].isFocus) {
+  //   focusOnLine();
+  // } else {
+  //   changeCanvasContent();
+  // }
 }
 
 // toggleLineFocus();

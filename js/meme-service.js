@@ -18,22 +18,30 @@ let gMeme = {
       align: 'left',
       color: 'red',
       isFocus: true,
+      lineWidth: 0,
     },
   ],
 };
 
 function createTxtLine(txt = '') {
   gMeme.lines[gCurrLineIdx].isFocus = false;
+
   const line = {
     txt,
     size: 20,
     align: 'left',
     color: 'red',
     isFocus: true,
+    lineWidth: 0,
   };
   gMeme.lines.push(line);
   gCurrLineIdx++;
   // console.log('afret createline', gCurrLineIdx);
+}
+
+function updateLineWidth(lineWidth, idx) {
+  gMeme.lines[idx].lineWidth = lineWidth;
+  // console.log('gMeme', gMeme.lines[gCurrLineIdx]);
 }
 
 // function checkFocusStatus(){
@@ -69,8 +77,13 @@ function changeLineFocus() {
     return;
   }
   gMeme.lines[gCurrLineIdx].isFocus = false;
-  gCurrLineIdx--;
-  gCurrLineIdx = gCurrLineIdx < 0 ? gMeme.lines.length - 1 : gCurrLineIdx--;
+  // gCurrLineIdx--;
+  // gCurrLineIdx = gCurrLineIdx < 0 ? gMeme.lines.length - 1 : gCurrLineIdx--;
+  if (gCurrLineIdx - 1 < 0) {
+    gCurrLineIdx = gMeme.lines.length - 1;
+  } else {
+    gCurrLineIdx--;
+  }
   gMeme.lines[gCurrLineIdx].isFocus = true;
 }
 
