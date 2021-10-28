@@ -3,28 +3,31 @@ let gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onSelectImg(imgId) {
+  let elGallery = document.querySelector('.image-gallery');
+  elGallery.style.display = 'none';
+  document.querySelector('.main-content').style.display = 'flex';
   updateMemeImg(imgId);
+  renderCanvas();
+  resizeCanvas();
   changeCanvasContent();
 }
 
 function onTypeTxt(txt) {
   updateMemeTxt(txt);
-  // createTxtLine(txt);
   changeCanvasContent();
-  // focusOnLine();
 }
 
 function onChangeFontSize(sign) {
   changeFontSize(sign);
   changeCanvasContent();
 }
+
 function onAddLine() {
   createTxtLine();
-  // toggleLineFocus();
   clearPlaceholder();
-  // unfocusLine();
   changeCanvasContent();
 }
+
 function onSelectLine() {
   changeLineFocus();
   changeCanvasContent();
@@ -52,13 +55,11 @@ function getEvPos(ev) {
 }
 
 function onDown(ev) {
-  console.log('onDown');
   const pos = getEvPos(ev);
   if (!isLineClicked(pos)) return;
   setLineDrag(true);
   gStartPos = pos;
   document.body.style.cursor = 'grabbing';
-  // console.log('grabbing');
 }
 
 function onMove(ev) {
@@ -80,4 +81,29 @@ function onUp() {
   document.body.style.cursor = 'auto';
 }
 
-function onUploadImg() {}
+function onImgInput(ev) {
+  loadImageFromInput(ev, renderImg);
+}
+
+function loadImageFromInput(ev, onImageReady) {
+  var reader = new FileReader();
+
+  reader.onload = function (event) {
+    var img = new Image();
+    img.onload = onImageReady.bind(null, img);
+    img.src = event.target.result;
+    setImgFromInput(img.src);
+  };
+  reader.readAsDataURL(ev.target.files[0]);
+}
+
+function renderImg(img) {
+  const ctx = getCtx();
+  let elGallery = document.querySelector('.image-gallery');
+  elGallery.style.display = 'none';
+  document.querySelector('.main-content').style.display = 'flex';
+  renderCanvas();
+  resizeCanvas();
+  const elCanvas = getCanvas();
+  ctx.drawImage(img, 0, 0, elCanvas.width, elCanvas.height);
+}

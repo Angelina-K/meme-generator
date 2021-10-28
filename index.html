@@ -6,48 +6,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Angelina's Meme-Gen</title>
     <link rel="stylesheet" href="style/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body onload="onInit()">
-    <section class="main-content flex">
-      <section class="image-gallery"></section>
-      <div class="main-container flex">
-        <section class="inputs-container flex flex-column">
-          <div class="inputs-content grid">
+    <header class="header">
+      <div class="header-content flex space-between align-center">
+        <h2 class="logo">Meme-Gen</h2>
+        <div class="nav-bar">
+          <ul class="nav-bar-content clean-list flex">
+            <li>
+              <a href="#">Gallery</a>
+            </li>
+            <li>
+              <a href="#">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+    <main class="main-container flex flex-column align-center">
+      <section class="image-gallery flex"></section>
+
+      <div class="main-content flex align-center">
+        <section class="input flex col">
+          <div class="inputs-content flex col">
             <input
               class="text-input"
               type="text"
               oninput="onTypeTxt(this.value)"
               placeholder="Write Something"
             />
-            <div class="text-editor grid">
-              <button class="btn text-editor-btn" onclick="onChangeFontSize(1)">
-                <img src="img/A+.png" alt="" />
-              </button>
-              <button
-                class="btn text-editor-btn"
-                onclick="onChangeFontSize(-1)"
-              >
-                <img src="img/A-.png" alt="" />
-              </button>
-              <button class="btn text-editor-btn" onclick="onSelectLine()">
+            <div class="line-editor flex">
+              <button class="select-line btn" onclick="onSelectLine()">
                 <img src="img/up.png" alt="" />
                 <img src="img/down.png" alt="" />
               </button>
-              <button class="btn text-editor-btn" onclick="onAddLine()">
+              <button class="add-line btn" onclick="onAddLine()">
                 <img src="img/+.png" alt="" />
+              </button>
+            </div>
+            <div class="text-editor flex">
+              <button class="btn" onclick="onChangeFontSize(1)">
+                <img src="img/A+.png" alt="" />
+              </button>
+              <button class="btn" onclick="onChangeFontSize(-1)">
+                <img src="img/A-.png" alt="" />
               </button>
             </div>
           </div>
         </section>
-        <div class="output">
+        <div class="meme output">
           <canvas class="canvas" width="400" height="400"></canvas>
         </div>
       </div>
-    </section>
+    </main>
 
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
-    <script src="js/inputs-service.js"></script>
     <script src="js/upload-service.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/main.js"></script>

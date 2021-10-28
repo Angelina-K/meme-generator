@@ -1,12 +1,11 @@
 'use strict';
+
 function onInit() {
   renderGallery();
   renderCanvas();
   addListeners();
-
   window.addEventListener('resize', resizeCanvas);
   window.addEventListener('resize', () => {
-    console.log('resized');
     resizeCanvas();
   });
 }
@@ -14,7 +13,6 @@ function onInit() {
 function addListeners() {
   const elCanvas = getCanvas();
   addMouseListeners(elCanvas);
-  // addTouchListeners();
 }
 
 function addMouseListeners(elCanvas) {
@@ -30,17 +28,15 @@ function addTouchListeners() {
 }
 
 function renderGallery() {
+  addGalleryImgs();
   const imgs = getAllImgs();
   let elGallery = document.querySelector('.image-gallery');
+  const emptyImgStr = `<div class="upload-img img"><input type="file"  name="image" onchange="onImgInput(event)" />Upload Image</div>`;
   const srtHtml = imgs.map((img) => {
     const imgId = img.id;
-    const strImg = `<div class="img" onclick="onSelectImg(${imgId})" style="background-image: url(img/${imgId}.jpg)"></div>`;
+    const strImg = `<div class="img upload-img" onclick="onSelectImg(${imgId})" style="background-image: url(img/${imgId}.jpg)"></div>`;
     return strImg;
   });
-  elGallery.innerHTML = srtHtml;
+
+  elGallery.innerHTML = emptyImgStr + srtHtml;
 }
-
-// IF TIME PERMITS clean HTML
-// function renderBtns(){
-
-// }
