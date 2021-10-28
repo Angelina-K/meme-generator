@@ -79,3 +79,5 @@ function onUp() {
   setLineDrag(false);
   document.body.style.cursor = 'auto';
 }
+
+function onUploadImg() {}
