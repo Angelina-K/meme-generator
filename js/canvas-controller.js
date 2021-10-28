@@ -61,7 +61,6 @@ function drawText() {
   meme.lines.forEach((line, idx) => {
     const { txt, size } = meme.lines[idx];
     if (!meme.lines[idx].pos) {
-      console.log('!line.pos');
       y = getTextPose(idx);
     } else {
       x = line.pos.x;
