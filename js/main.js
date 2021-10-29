@@ -32,14 +32,14 @@ function renderGallery() {
   const imgs = getAllImgs();
   console.log(imgs);
   let elGallery = document.querySelector('.image-gallery');
-  const emptyImgStr = `<div class="upload-img "><input type="file"  name="image" onchange="onImgInput(event)" />Upload Image</div>`;
+  // const emptyImgStr = `<div class="upload-img "><input type="file"  name="image" onchange="onImgInput(event)" />Upload Image</div>`;
   const srtHtml = imgs.map((img) => {
     const imgId = img.id;
     const strImg = `<div class="img" onclick="onSelectImg(${imgId})"><img src="img/${imgId}.jpg" alt=""></div>`;
     return strImg;
   });
 
-  elGallery.innerHTML = emptyImgStr + srtHtml.join('');
+  elGallery.innerHTML = srtHtml.join('');
 }
 
 function toggleMenu() {

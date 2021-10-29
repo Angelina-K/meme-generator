@@ -7,7 +7,7 @@ function onSelectImg(imgId) {
   let elCanvas = document.querySelector('.canvas');
   elCanvas.hideen = false;
 
-  let elGallery = document.querySelector('.image-gallery');
+  let elGallery = document.querySelector('.gallery-container');
   elGallery.style.display = 'none';
   document.querySelector('.meme-content').style.display = 'flex';
   updateMemeImg(imgId);

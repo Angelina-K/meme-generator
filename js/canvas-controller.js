@@ -67,8 +67,10 @@ function renderImgFromInput(img) {
 
 function renderCanvas() {
   gElCanvas = document.querySelector('.canvas');
-  console.log(gElCanvas);
   gCtx = gElCanvas.getContext('2d');
+
+  // const heightRatio = 1.5;
+  // gElCanvas.height = gElCanvas.width * heightRatio;
 }
 
 function addResizeListener() {

@@ -26,42 +26,57 @@
       </button>
     </header>
     <main class="main-container">
-      <section class="image-gallery main-layout"></section>
+      <section class="gallery-container main-layout flex col">
+        <div class="upload-img">
+          <input type="file" name="image" onchange="onImgInput(event)" />Upload
+          Image
+        </div>
+        <div class="image-gallery main-layout"></div>
+      </section>
       <section class="meme-content main-layout flex align-center">
-        <div class="inputs grid">
+        <div class="inputs flex col align-center">
           <input
             class="text-input"
             type="text"
             oninput="onTypeTxt(this.value)"
             placeholder="Write Something"
           />
-          <button class="btn select" onclick="onSelectLine()">
-            <img src="img/icons/updown.png" alt="" />
-          </button>
-          <button class="btn add" onclick="onAddLine()">
-            <img src="img/icons/add.png" alt="" />
-          </button>
-          <button class="btn" onclick="onChangeFontSize(1)">
-            <img src="img/icons/a+.png" alt="" />
-          </button>
-          <button class="btn" onclick="onChangeFontSize(-1)">
-            <img src="img/icons/a-.png" alt="" />
-          </button>
-          <button class="btn" onclick="onAlignText('left')">
-            <img src="img/icons/align-to-left.png" alt="" />
-          </button>
-          <button class="btn" onclick="onAlignText('center')">
-            <img src="img/icons/center-text-alignment.png" alt="" />
-          </button>
-          <button class="btn" onclick="onAlignText('right')">
-            <img src="img/icons/align-to-right.png" alt="" />
-          </button>
+          <div class="line-editor flex row">
+            <button class="btn select" onclick="onSelectLine()">
+              <img src="img/icons/updown.png" alt="" />
+            </button>
+            <button class="btn add" onclick="onAddLine()">
+              <img src="img/icons/add.png" alt="" />
+            </button>
+          </div>
+          <div class="txt-editor flex row">
+            <button class="btn font-up" onclick="onChangeFontSize(1)">
+              <img src="img/icons/a+.png" alt="" />
+            </button>
+            <button class="btn font-down" onclick="onChangeFontSize(-1)">
+              <img src="img/icons/a-.png" alt="" />
+            </button>
+            <button class="btn txt-left" onclick="onAlignText('left')">
+              <img src="img/icons/align-to-left.png" alt="" />
+            </button>
+            <button class="btn txt-center" onclick="onAlignText('center')">
+              <img src="img/icons/center-text-alignment.png" alt="" />
+            </button>
+            <button class="btn txt-right" onclick="onAlignText('right')">
+              <img src="img/icons/align-to-right.png" alt="" />
+            </button>
+          </div>
         </div>
         <div class="output" flex>
           <canvas class="canvas" width="500" height="500"></canvas>
         </div>
       </section>
     </main>
+    <footer class="flex main-layout align-center">
+      <div class="logo flex">
+        <img src="img/icons/logo.png" alt="" />
+      </div>
+    </footer>
 
     <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
