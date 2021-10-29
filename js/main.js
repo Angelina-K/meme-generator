@@ -4,10 +4,10 @@ function onInit() {
   renderGallery();
   renderCanvas();
   addListeners();
-  window.addEventListener('resize', resizeCanvas);
-  window.addEventListener('resize', () => {
-    resizeCanvas();
-  });
+  // window.addEventListener('resize', resizeCanvas);
+  // window.addEventListener('resize', () => {
+  //   resizeCanvas();
+  // });
 }
 
 function addListeners() {
@@ -30,13 +30,18 @@ function addTouchListeners() {
 function renderGallery() {
   addGalleryImgs();
   const imgs = getAllImgs();
+  console.log(imgs);
   let elGallery = document.querySelector('.image-gallery');
-  const emptyImgStr = `<div class="upload-img img"><input type="file"  name="image" onchange="onImgInput(event)" />Upload Image</div>`;
+  const emptyImgStr = `<div class="upload-img "><input type="file"  name="image" onchange="onImgInput(event)" />Upload Image</div>`;
   const srtHtml = imgs.map((img) => {
     const imgId = img.id;
-    const strImg = `<div class="img upload-img" onclick="onSelectImg(${imgId})" style="background-image: url(img/${imgId}.jpg)"></div>`;
+    const strImg = `<div class="img" onclick="onSelectImg(${imgId})"><img src="img/${imgId}.jpg" alt=""></div>`;
     return strImg;
   });
 
-  elGallery.innerHTML = emptyImgStr + srtHtml;
+  elGallery.innerHTML = emptyImgStr + srtHtml.join('');
+}
+
+function toggleMenu() {
+  document.body.classList.toggle('menu-open');
 }

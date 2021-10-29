@@ -30,10 +30,16 @@ function changeCanvasContent() {
   } else {
     img.src = `img/${meme.selectedImgId}.jpg`;
   }
-  img.onload = () => {
-    var pattern = gCtx.createPattern(img, 'repeat');
-    gCtx.fillStyle = pattern;
-    gCtx.fillRect(0, 0, gElCanvas.width, gElCanvas.height);
+  // img.onload = () => {
+  //   var ratio = img.naturalWidth / img.naturalHeight;
+  //   var width = gElCanvas.width;
+  //   var height = width / ratio;
+  //   gCtx.drawImage(img, 0, 0, width, height);
+
+  img.onload = function () {
+    gElCanvas.width = img.naturalWidth;
+    gElCanvas.height = img.naturalHeight;
+    gCtx.drawImage(img, 0, 0);
 
     drawText();
     const currLineIdx = getCurrLineIdx();
@@ -42,15 +48,42 @@ function changeCanvasContent() {
   };
 }
 
+function renderImgFromInput(img) {
+  const ctx = getCtx();
+  let elGallery = document.querySelector('.image-gallery');
+  elGallery.style.display = 'none';
+  document.querySelector('.meme-content').style.display = 'flex';
+  // let elCanvas = getCanvas();
+  // elCanvas = document.querySelector('.canvas');
+  gElCanvas.hidden = false;
+  gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+  resizeCanvas();
+}
+
+// var img = new Image();
+// img.onload = () => {
+//   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
+// };
+
 function renderCanvas() {
   gElCanvas = document.querySelector('.canvas');
+  console.log(gElCanvas);
   gCtx = gElCanvas.getContext('2d');
 }
 
+function addResizeListener() {
+  window.addEventListener('resize', resizeCanvas);
+  window.addEventListener('resize', () => {
+    resizeCanvas();
+  });
+}
+
 function resizeCanvas() {
-  let elContainer = document.querySelector('.output');
-  gElCanvas.width = elContainer.offsetWidth;
-  gElCanvas.height = elContainer.offsetHeight;
+  // let elContainer = document.querySelector('.output');
+  // gElCanvas.width = elContainer.offsetWidth;
+  // gElCanvas.height = elContainer.offsetHeight;
+  gCtx.canvas.width = gCtx.canvas.clientWidth;
+  gCtx.canvas.height = gCtx.canvas.clientHeight;
   changeCanvasContent();
 }
 

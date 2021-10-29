@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Angelina's Meme-Gen</title>
+    <title>Angelina's Memegen</title>
     <link rel="stylesheet" href="style/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -14,56 +14,53 @@
     />
   </head>
   <body onload="onInit()">
-    <header class="header">
-      <div class="header-content flex space-between align-center">
-        <h2 class="logo">Meme-Gen</h2>
-        <div class="nav-bar">
-          <ul class="nav-bar-content clean-list flex">
-            <li>
-              <a href="#">Gallery</a>
-            </li>
-            <li>
-              <a href="#">About</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="main-screen" onclick="toggleMenu()"></div>
+    <header class="main-header main-layout flex align-center space-between">
+      <div class="logo"><img src="img/icons/logo.png" alt="" /></div>
+      <ul class="main-nav flex clean-list">
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <button class="btn btn-menu" onclick="toggleMenu()">
+        <img src="img/icons/hamburger.png" alt="" />
+      </button>
     </header>
-    <main class="main-container flex flex-column align-center">
-      <section class="image-gallery flex"></section>
-
-      <div class="main-content flex align-center">
-        <section class="input flex col">
-          <div class="inputs-content flex col">
-            <input
-              class="text-input"
-              type="text"
-              oninput="onTypeTxt(this.value)"
-              placeholder="Write Something"
-            />
-            <div class="line-editor flex">
-              <button class="select-line btn" onclick="onSelectLine()">
-                <img src="img/up.png" alt="" />
-                <img src="img/down.png" alt="" />
-              </button>
-              <button class="add-line btn" onclick="onAddLine()">
-                <img src="img/+.png" alt="" />
-              </button>
-            </div>
-            <div class="text-editor flex">
-              <button class="btn" onclick="onChangeFontSize(1)">
-                <img src="img/A+.png" alt="" />
-              </button>
-              <button class="btn" onclick="onChangeFontSize(-1)">
-                <img src="img/A-.png" alt="" />
-              </button>
-            </div>
-          </div>
-        </section>
-        <div class="meme output">
-          <canvas class="canvas" width="400" height="400"></canvas>
+    <main class="main-container">
+      <section class="image-gallery main-layout"></section>
+      <section class="meme-content main-layout flex align-center">
+        <div class="inputs grid">
+          <input
+            class="text-input"
+            type="text"
+            oninput="onTypeTxt(this.value)"
+            placeholder="Write Something"
+          />
+          <button class="btn select" onclick="onSelectLine()">
+            <img src="img/icons/updown.png" alt="" />
+          </button>
+          <button class="btn add" onclick="onAddLine()">
+            <img src="img/icons/add.png" alt="" />
+          </button>
+          <button class="btn" onclick="onChangeFontSize(1)">
+            <img src="img/icons/a+.png" alt="" />
+          </button>
+          <button class="btn" onclick="onChangeFontSize(-1)">
+            <img src="img/icons/a-.png" alt="" />
+          </button>
+          <button class="btn" onclick="onAlignText('left')">
+            <img src="img/icons/align-to-left.png" alt="" />
+          </button>
+          <button class="btn" onclick="onAlignText('center')">
+            <img src="img/icons/center-text-alignment.png" alt="" />
+          </button>
+          <button class="btn" onclick="onAlignText('right')">
+            <img src="img/icons/align-to-right.png" alt="" />
+          </button>
         </div>
-      </div>
+        <div class="output" flex>
+          <canvas class="canvas" width="500" height="500"></canvas>
+        </div>
+      </section>
     </main>
 
     <script src="js/util-service.js"></script>
