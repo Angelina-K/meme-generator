@@ -5,6 +5,7 @@ function onInit() {
   renderGallery();
   renderCanvas();
   addListeners();
+  // console.log(gMeme);
   // window.addEventListener('resize', resizeCanvas);
   // window.addEventListener('resize', () => {
   //   resizeCanvas();

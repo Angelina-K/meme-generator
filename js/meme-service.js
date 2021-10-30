@@ -15,7 +15,7 @@ let gMeme = {
       txt: '',
       size: 40,
       align: 'left',
-      color: 'black',
+      fillStyle: 'black',
       lineWidth: 0,
       isFocus: true,
       boxBoundaries: 0,
@@ -25,13 +25,13 @@ let gMeme = {
 };
 
 function createTxtLine(txt = '') {
-  gMeme.lines[gCurrLineIdx].isFocus = false;
+  if (gMeme.lines.length > 1) gMeme.lines[gCurrLineIdx].isFocus = false;
   const line = {
     pos: 0,
     txt,
     size: 40,
     align: 'left',
-    color: 'black',
+    fillStyle: 'black',
     lineWidth: 0,
     isFocus: true,
     boxBoundaries: 0,
@@ -39,6 +39,7 @@ function createTxtLine(txt = '') {
   };
   gMeme.lines.push(line);
   gCurrLineIdx++;
+  console.log(gCurrLineIdx);
   return line;
 }
 
@@ -71,6 +72,21 @@ function moveLine(dx, dy) {
   gMeme.lines[gCurrLineIdx].pos.x += dx;
   gMeme.lines[gCurrLineIdx].pos.y += dy;
 }
+function removeLine() {
+  if (!gMeme.lines[gCurrLineIdx].isFocus) return;
+  gMeme.lines.splice(gCurrLineIdx, 1);
+  if (gCurrLineIdx <= 0) {
+    createTxtLine();
+    gCurrLineIdx = 0;
+    return;
+  }
+  if (gCurrLineIdx === 1) {
+    gCurrLineIdx = 0;
+  }
+  if (gCurrLineIdx !== 1 && gCurrLineIdx === gMeme.lines.length - 1) {
+    gCurrLineIdx--;
+  }
+}
 
 function isLineClicked(clickedPos) {
   if (!gMeme.lines[gCurrLineIdx].isFocus) {
@@ -92,18 +108,22 @@ function isLineClicked(clickedPos) {
 }
 
 function setLineDrag(isDrag) {
+  if (!gMeme.lines) return;
   gMeme.lines[gCurrLineIdx].isDrag = isDrag;
 }
 
 function updateLineWidth(lineWidth, idx) {
+  if (!gMeme.lines) return;
   gMeme.lines[idx].lineWidth = lineWidth;
 }
 
 function changeLineFocus() {
-  if (gMeme.lines.length <= 1) {
-    gMeme.lines[gCurrLineIdx].isFocus = false;
-    return;
-  }
+  // if (gMeme.lines.length <= 1) {
+  //   gMeme.lines[gCurrLineIdx].isFocus = false;
+  //   return;
+  // }
+  console.log(gMeme);
+  console.log(gCurrLineIdx);
   gMeme.lines[gCurrLineIdx].isFocus = false;
   if (gCurrLineIdx - 1 < 0) {
     gCurrLineIdx = gMeme.lines.length - 1;
@@ -125,6 +145,10 @@ function updateMemeImg(imgId) {
 }
 
 function updateMemeTxt(txt) {
+  console.log(gMeme.lines);
+  console.log(gCurrLineIdx);
+
+  if (!gMeme.lines) return;
   gMeme.lines[gCurrLineIdx].txt = txt;
 }
 
@@ -132,12 +156,17 @@ function getCurrLineIdx() {
   return gCurrLineIdx;
 }
 function getCurrMeme() {
+  // if (!gMeme.lines) return
   return gMeme;
 }
 function getAllImgs() {
   return gImgs;
 }
 
-// function saveMemeToStorage() {
-//   saveToStorage('memeDB', gMeme);
+function updateTxtSide(side) {
+  gMeme.lines[gCurrLineIdx].align = side;
+}
+
+// function updateTxtcolor(color){
+//   gMeme.lines[gCurrLineIdx].color=side
 // }

@@ -40,9 +40,20 @@ function onChangeFontSize(sign) {
 }
 
 function onAddLine() {
+  const meme = getCurrMeme();
+  const currLineIdx = getCurrLineIdx();
+  console.log(currLineIdx);
+  if (!meme.lines[currLineIdx].txt) return;
   createTxtLine();
   clearPlaceholder();
   changeCanvasContent();
+}
+
+function onRemoveLine() {
+  removeLine();
+  changeCanvasContent();
+  // onAddLine();
+  clearPlaceholder();
 }
 
 function onSelectLine() {
@@ -84,7 +95,7 @@ function onMove(ev) {
   const idx = getCurrLineIdx();
   const meme = getCurrMeme();
   const memeLine = meme.lines[idx];
-  if (memeLine.isDrag) {
+  if (meme.lines && memeLine.isDrag) {
     const pos = getEvPos(ev);
     const dx = pos.x - gStartPos.x;
     const dy = pos.y - gStartPos.y;
@@ -143,4 +154,9 @@ function onOpenSavedMems() {
 
 function onSelectSaved() {
   console.log('Sorry, view only...');
+}
+
+function onAlignText(side) {
+  updateTxtSide(side);
+  changeCanvasContent();
 }

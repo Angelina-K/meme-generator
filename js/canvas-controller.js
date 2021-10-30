@@ -30,6 +30,13 @@ function getTextPose(idx) {
 
   return y;
 }
+function getTxtPoseForAlign(align) {
+  console.log('getTxtPoseForAlign', align);
+  let x;
+  if (align === 'right') x = gElCanvas.width - 20;
+  if (align === 'center') x = gElCanvas.width / 2;
+  return x;
+}
 
 function changeCanvasContent() {
   const meme = getCurrMeme();
@@ -53,7 +60,11 @@ function changeCanvasContent() {
 
     drawText();
     const currLineIdx = getCurrLineIdx();
-    if (meme.lines[currLineIdx].isFocus && meme.lines[currLineIdx].txt) {
+    if (
+      meme.lines[currLineIdx] &&
+      meme.lines[currLineIdx].isFocus &&
+      meme.lines[currLineIdx].txt
+    ) {
       console.log('drawing rect around');
       focusOnLine();
     }
@@ -108,18 +119,24 @@ function drawText() {
   let y;
   const meme = getCurrMeme();
   meme.lines.forEach((line, idx) => {
-    const { txt, size } = meme.lines[idx];
+    const { txt, size, align, fillStyle } = meme.lines[idx];
+    console.log(align);
     if (!meme.lines[idx].pos) {
       y = getTextPose(idx);
+      if (align !== 'left') {
+        x = getTxtPoseForAlign(align);
+        console.log(x);
+      }
     } else {
       x = line.pos.x;
       y = line.pos.y;
     }
 
     gCtx.textBaseline = 'top';
+    gCtx.textAlign = `${align}`;
     gCtx.lineWidth = 2;
     gCtx.strokeStyle = 'white';
-    gCtx.fillStyle = 'black';
+    gCtx.fillStyle = `${fillStyle}`;
     gCtx.font = `${size}px Impact`;
     gCtx.fillText(txt, x, y);
     gCtx.strokeText(txt, x, y);
