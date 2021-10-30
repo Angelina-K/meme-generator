@@ -4,6 +4,11 @@ let gElCanvas;
 let gCtx;
 let gSavedMems = [];
 
+function loadSavedStorage() {
+  const savedMems = loadFromStorage('imgesDB', gSavedMems);
+  gSavedMems = !savedMems ? [] : savedMems;
+}
+
 function getSavedMems() {
   return gSavedMems;
 }
@@ -49,11 +54,13 @@ function changeCanvasContent() {
     drawText();
     const currLineIdx = getCurrLineIdx();
     if (meme.lines[currLineIdx].isFocus && meme.lines[currLineIdx].txt) {
-      console.log(meme.lines[currLineIdx].isFocus);
+      console.log('drawing rect around');
       focusOnLine();
     }
   };
 }
+
+function renderImgAndTxt() {}
 
 function renderImgFromInput(img) {
   const ctx = getCtx();
@@ -172,15 +179,16 @@ function saveMeme() {
   unFocusLine();
   changeCanvasContent();
 
-  gSavedMems.push(getImgData());
-  console.log(gSavedMems);
+  const canvas = gElCanvas;
+
+  const imgData = getImgData(canvas);
+  gSavedMems.push(imgData);
 
   saveAsImgToStorage('imgesDB', gSavedMems);
-  // saveToStorage('imgesDB', gSavedMems);
 }
 
-function getImgData() {
-  var dataURL = gElCanvas.toDataURL('image/png');
+function getImgData(canvas) {
+  var dataURL = canvas.toDataURL('image/png');
 
   return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
 }
