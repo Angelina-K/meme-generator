@@ -30,8 +30,8 @@ function getTextPose(idx) {
 
   return y;
 }
+
 function getTxtPoseForAlign(align) {
-  console.log('getTxtPoseForAlign', align);
   let x;
   if (align === 'right') x = gElCanvas.width - 20;
   if (align === 'center') x = gElCanvas.width / 2;
@@ -47,12 +47,6 @@ function changeCanvasContent() {
   } else {
     img.src = `img/${meme.selectedImgId}.jpg`;
   }
-  // img.onload = () => {
-  //   var ratio = img.naturalWidth / img.naturalHeight;
-  //   var width = gElCanvas.width;
-  //   var height = width / ratio;
-  //   gCtx.drawImage(img, 0, 0, width, height);
-
   img.onload = function () {
     gElCanvas.width = img.naturalWidth;
     gElCanvas.height = img.naturalHeight;
@@ -65,7 +59,6 @@ function changeCanvasContent() {
       meme.lines[currLineIdx].isFocus &&
       meme.lines[currLineIdx].txt
     ) {
-      console.log('drawing rect around');
       focusOnLine();
     }
   };
@@ -78,24 +71,14 @@ function renderImgFromInput(img) {
   let elGallery = document.querySelector('.image-gallery');
   elGallery.style.display = 'none';
   document.querySelector('.meme-content').style.display = 'flex';
-  // let elCanvas = getCanvas();
-  // elCanvas = document.querySelector('.canvas');
   gElCanvas.hidden = false;
   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
   resizeCanvas();
 }
 
-// var img = new Image();
-// img.onload = () => {
-//   gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height);
-// };
-
 function renderCanvas() {
   gElCanvas = document.querySelector('.canvas');
   gCtx = gElCanvas.getContext('2d');
-
-  // const heightRatio = 1.5;
-  // gElCanvas.height = gElCanvas.width * heightRatio;
 }
 
 function addResizeListener() {
@@ -106,9 +89,6 @@ function addResizeListener() {
 }
 
 function resizeCanvas() {
-  // let elContainer = document.querySelector('.output');
-  // gElCanvas.width = elContainer.offsetWidth;
-  // gElCanvas.height = elContainer.offsetHeight;
   gCtx.canvas.width = gCtx.canvas.clientWidth;
   gCtx.canvas.height = gCtx.canvas.clientHeight;
   changeCanvasContent();
@@ -120,12 +100,10 @@ function drawText() {
   const meme = getCurrMeme();
   meme.lines.forEach((line, idx) => {
     const { txt, size, align, fillStyle } = meme.lines[idx];
-    console.log(align);
     if (!meme.lines[idx].pos) {
       y = getTextPose(idx);
       if (align !== 'left') {
         x = getTxtPoseForAlign(align);
-        console.log(x);
       }
     } else {
       x = line.pos.x;
@@ -153,11 +131,7 @@ function focusOnLine() {
 function drawRect() {
   const idx = getCurrLineIdx();
   const meme = getCurrMeme();
-  // const txtSize = meme.lines[idx].size;
-  // const lineWidth = meme.lines[idx].lineWidth;
-
   const { size, txtSize, lineWidth } = meme.lines[idx];
-
   let x = 20;
   let y = getTextPose(idx);
   if (meme.lines[idx].pos) {
@@ -166,14 +140,9 @@ function drawRect() {
   }
   var fontsize = size;
   var lineHeight = fontsize * 1.286;
-  // var textWidth = gCtx.measureText(text).width;
   gCtx.beginPath();
   gCtx.rect(x - 10, y - 10, lineWidth + 20, lineHeight + 20);
   gCtx.fillStyle = '#ffffff00';
-  // gCtx.rect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
-  // gCtx.fillStyle = '#ffffff00';
-  // gCtx.strokeRect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
-
   gCtx.strokeRect(x - 10, y - 10, lineWidth + 20, lineHeight + 20);
 
   gCtx.stroke();

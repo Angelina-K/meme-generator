@@ -18,8 +18,6 @@ a {
   text-decoration: none;
 }
 .main-layout {
-  /* margin-left: 10px;
-  margin-right: 10px; */
   margin-left: 0.65em;
   margin-right: 0.65em;
 }
@@ -33,8 +31,6 @@ a {
 }
 .flex.space-between {
   justify-content: space-between;
-}
-.flex.justify-center {
 }
 .flex.col {
   flex-direction: column;
@@ -51,12 +47,10 @@ a {
 /* CONTENT */
 .main-header {
   height: 65px;
-  /* background: #ff7f00; */
 }
 .logo img {
   height: 22px;
 }
-
 .btn-menu {
   background-color: #ff800000;
 }
@@ -79,23 +73,11 @@ a {
 .saved-memes {
   display: none;
 }
-
 .meme-content {
   display: none;
   flex-direction: column-reverse;
   justify-content: center;
-
   gap: 20px;
-  /* height: 80%vh; */
-}
-.inputs {
-  /* width: 30em;
-  height: 30em; */
-}
-.output {
-  /* width: 500px; */
-
-  /* flex-basis: 500px; */
 }
 .inputs {
   width: 500px;
@@ -110,19 +92,14 @@ a {
   border: none;
   text-align: center;
 }
-
 .txt-editor,
 .line-editor,
 .share {
   gap: 26px;
 }
-/* .line-editor {
-  flex-wrap: wrap;
-} */
 .share-btn,
 .download-btn {
   width: max-content;
-  height: max-content;
   background: #ff7f00;
   padding: 1em 0.75em;
   border: none;
@@ -131,7 +108,6 @@ a {
   font-size: 20px;
   cursor: pointer;
 }
-
 .upload-img {
   text-align: center;
   position: relative;
@@ -140,14 +116,6 @@ a {
   width: max-content;
   padding: 10px;
   margin-bottom: 20px;
-}
-.image-gallery {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
-  grid-auto-rows: auto;
-  grid-auto-flow: row dense;
-  grid-gap: 5px;
-  margin: 0px; */
 }
 .gallery {
   display: grid;
@@ -159,13 +127,10 @@ a {
 }
 .img {
   min-width: 165px;
-  /* height: auto; */
-  /* opacity: 0.7; */
 }
 .saved-memes.img {
   max-width: 500px;
 }
-
 input[type='file' i] {
   opacity: 0;
   border: none;
@@ -177,7 +142,6 @@ input[type='file' i] {
   top: 0px;
   height: 100%;
 }
-
 .canvas {
   max-width: 100%;
   height: auto;
@@ -198,7 +162,6 @@ body.menu-open .main-screen {
   pointer-events: auto;
   opacity: 1;
 }
-
 footer {
   padding-top: 75px;
   padding-bottom: 75px;
@@ -256,13 +219,8 @@ footer {
     height: 60px;
     width: 60px;
   }
-  .output,
-  .inputs {
-  }
 }
 /* fullscreen */
-
-/* BIGGER GALLERY GAP IN FULL SCREEN */
 @media (m-width: 1020px) {
   .main-layout {
     margin-left: 3.25em;

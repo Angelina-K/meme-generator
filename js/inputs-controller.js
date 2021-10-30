@@ -3,7 +3,6 @@ let gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onSelectImg(imgId) {
-  console.log('on select img');
   addResizeListener();
   let elCanvas = document.querySelector('.canvas');
   elCanvas.hideen = false;
@@ -42,7 +41,6 @@ function onChangeFontSize(sign) {
 function onAddLine() {
   const meme = getCurrMeme();
   const currLineIdx = getCurrLineIdx();
-  console.log(currLineIdx);
   if (!meme.lines[currLineIdx].txt) return;
   createTxtLine();
   clearPlaceholder();
@@ -52,7 +50,6 @@ function onAddLine() {
 function onRemoveLine() {
   removeLine();
   changeCanvasContent();
-  // onAddLine();
   clearPlaceholder();
 }
 
@@ -83,7 +80,6 @@ function getEvPos(ev) {
 }
 
 function onDown(ev) {
-  console.log('onDown');
   const pos = getEvPos(ev);
   if (!isLineClicked(pos)) return;
   setLineDrag(true);
@@ -115,25 +111,19 @@ function onImgInput(ev) {
 }
 
 function onShareImg() {
-  // saveMeme();
-  // changeCanvasContent();
   uploadImg();
 }
 
 function onDownloadImg(elLink) {
   saveMeme();
   const canvas = getCanvas();
-  // changeCanvasContent();
   var imgContent = canvas.toDataURL('image/jpeg');
-  // var imgContent = gCtx.getImageData(0, 0, gElCanvas.width, gElCanvas.higth);
   elLink.href = imgContent;
 }
-// FIXME MESSY
+
 function onOpenSavedMems() {
   let elGallery = document.querySelector('.gallery-container');
-
   elGallery.style.display = 'none';
-
   document.querySelector('.meme-content').style.display = 'none';
   let elSavedMemes = document.querySelector('.saved-memes');
   elSavedMemes.style.display = 'flex';

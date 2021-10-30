@@ -1,5 +1,4 @@
 'use strict';
-// let gKeywords = {'happy': 12,'funny puk': 1}
 let gMems = [];
 let gCurrLineIdx = 0;
 
@@ -39,7 +38,6 @@ function createTxtLine(txt = '') {
   };
   gMeme.lines.push(line);
   gCurrLineIdx++;
-  console.log(gCurrLineIdx);
   return line;
 }
 
@@ -68,7 +66,6 @@ function saveBoxSize(idx, boxBoundaries) {
 }
 
 function moveLine(dx, dy) {
-  console.log('moving line');
   gMeme.lines[gCurrLineIdx].pos.x += dx;
   gMeme.lines[gCurrLineIdx].pos.y += dy;
 }
@@ -99,10 +96,8 @@ function isLineClicked(clickedPos) {
     clickedPos.y >= boxBoundaries.y &&
     clickedPos.y <= boxBoundaries.yHight
   ) {
-    console.log('loneclicked');
     return true;
   } else {
-    console.log('!!!loneclicked');
     return false;
   }
 }
@@ -118,12 +113,6 @@ function updateLineWidth(lineWidth, idx) {
 }
 
 function changeLineFocus() {
-  // if (gMeme.lines.length <= 1) {
-  //   gMeme.lines[gCurrLineIdx].isFocus = false;
-  //   return;
-  // }
-  console.log(gMeme);
-  console.log(gCurrLineIdx);
   gMeme.lines[gCurrLineIdx].isFocus = false;
   if (gCurrLineIdx - 1 < 0) {
     gCurrLineIdx = gMeme.lines.length - 1;
@@ -145,9 +134,6 @@ function updateMemeImg(imgId) {
 }
 
 function updateMemeTxt(txt) {
-  console.log(gMeme.lines);
-  console.log(gCurrLineIdx);
-
   if (!gMeme.lines) return;
   gMeme.lines[gCurrLineIdx].txt = txt;
 }
@@ -156,7 +142,6 @@ function getCurrLineIdx() {
   return gCurrLineIdx;
 }
 function getCurrMeme() {
-  // if (!gMeme.lines) return
   return gMeme;
 }
 function getAllImgs() {
@@ -166,7 +151,3 @@ function getAllImgs() {
 function updateTxtSide(side) {
   gMeme.lines[gCurrLineIdx].align = side;
 }
-
-// function updateTxtcolor(color){
-//   gMeme.lines[gCurrLineIdx].color=side
-// }
