@@ -2,6 +2,11 @@
 
 let gElCanvas;
 let gCtx;
+let gSavedMems = [];
+
+function getSavedMems() {
+  return gSavedMems;
+}
 
 function getCanvas() {
   return gElCanvas;
@@ -43,8 +48,10 @@ function changeCanvasContent() {
 
     drawText();
     const currLineIdx = getCurrLineIdx();
-    if (meme.lines[currLineIdx].isFocus && meme.lines[currLineIdx].txt)
+    if (meme.lines[currLineIdx].isFocus && meme.lines[currLineIdx].txt) {
+      console.log(meme.lines[currLineIdx].isFocus);
       focusOnLine();
+    }
   };
 }
 
@@ -103,7 +110,7 @@ function drawText() {
     }
 
     gCtx.textBaseline = 'top';
-    gCtx.lineWidth = 1.5;
+    gCtx.lineWidth = 2;
     gCtx.strokeStyle = 'white';
     gCtx.fillStyle = 'black';
     gCtx.font = `${size}px Impact`;
@@ -159,4 +166,21 @@ function drawRect() {
 
 function clearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height);
+}
+
+function saveMeme() {
+  unFocusLine();
+  changeCanvasContent();
+
+  gSavedMems.push(getImgData());
+  console.log(gSavedMems);
+
+  saveAsImgToStorage('imgesDB', gSavedMems);
+  // saveToStorage('imgesDB', gSavedMems);
+}
+
+function getImgData() {
+  var dataURL = gElCanvas.toDataURL('image/png');
+
+  return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
 }

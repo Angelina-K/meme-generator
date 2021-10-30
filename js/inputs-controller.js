@@ -3,6 +3,7 @@ let gStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onSelectImg(imgId) {
+  console.log('on select img');
   addResizeListener();
   let elCanvas = document.querySelector('.canvas');
   elCanvas.hideen = false;
@@ -11,7 +12,6 @@ function onSelectImg(imgId) {
   elGallery.style.display = 'none';
   document.querySelector('.meme-content').style.display = 'flex';
   updateMemeImg(imgId);
-  // renderCanvas();
   resizeCanvas();
   changeCanvasContent();
 }
@@ -81,7 +81,6 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
-  // console.log('on move');
   const idx = getCurrLineIdx();
   const meme = getCurrMeme();
   const memeLine = meme.lines[idx];
@@ -102,4 +101,34 @@ function onUp() {
 
 function onImgInput(ev) {
   loadImgFromInput(ev, renderImgFromInput);
+}
+
+function onShareImg() {
+  // saveMeme();
+  // changeCanvasContent();
+  uploadImg();
+}
+
+function onDownloadImg(elLink) {
+  saveMeme();
+  // changeCanvasContent();
+  var imgContent = gElCanvas.toDataURL('image/jpeg');
+  // var imgContent = gCtx.getImageData(0, 0, gElCanvas.width, gElCanvas.higth);
+  elLink.href = imgContent;
+}
+
+function onOpenSavedMems() {
+  let elGallery = document.querySelector('.gallery-container');
+  elGallery.style.display = 'none';
+  // main content display none
+  let elSavedMemes = document.querySelector('.saved-memes');
+  elSavedMemes.style.display = 'flex';
+
+  const memes = loadFromStorage('imgesDB');
+
+  const strHtml = memes.map((meme, idx) => {
+    const strMeme = `<div class="saved-meme img" onclick="onSelectSaved(${idx})"><img src="data:image/png;base64,${meme}" alt=""></div>`;
+    return strMeme;
+  });
+  elSavedMemes.innerHTML = strHtml.join('');
 }

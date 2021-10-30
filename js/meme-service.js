@@ -13,7 +13,7 @@ let gMeme = {
     {
       pos: 0,
       txt: '',
-      size: 20,
+      size: 40,
       align: 'left',
       color: 'black',
       lineWidth: 0,
@@ -29,7 +29,7 @@ function createTxtLine(txt = '') {
   const line = {
     pos: 0,
     txt,
-    size: 20,
+    size: 40,
     align: 'left',
     color: 'black',
     lineWidth: 0,
@@ -112,6 +112,9 @@ function changeLineFocus() {
   }
   gMeme.lines[gCurrLineIdx].isFocus = true;
 }
+function unFocusLine() {
+  gMeme.lines[gCurrLineIdx].isFocus = false;
+}
 
 function changeFontSize(sign) {
   gMeme.lines[gCurrLineIdx].size += sign;
@@ -134,3 +137,7 @@ function getCurrMeme() {
 function getAllImgs() {
   return gImgs;
 }
+
+// function saveMemeToStorage() {
+//   saveToStorage('memeDB', gMeme);
+// }
