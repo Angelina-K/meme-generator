@@ -72,6 +72,7 @@ function getEvPos(ev) {
 }
 
 function onDown(ev) {
+  console.log('onDown');
   const pos = getEvPos(ev);
   if (!isLineClicked(pos)) return;
   setLineDrag(true);
@@ -80,6 +81,7 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
+  // console.log('on move');
   const idx = getCurrLineIdx();
   const meme = getCurrMeme();
   const memeLine = meme.lines[idx];

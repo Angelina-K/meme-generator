@@ -101,6 +101,8 @@ function drawText() {
       x = line.pos.x;
       y = line.pos.y;
     }
+
+    gCtx.textBaseline = 'top';
     gCtx.lineWidth = 1.5;
     gCtx.strokeStyle = 'white';
     gCtx.fillStyle = 'black';
@@ -120,8 +122,10 @@ function focusOnLine() {
 function drawRect() {
   const idx = getCurrLineIdx();
   const meme = getCurrMeme();
-  const txtSize = meme.lines[idx].size;
-  const lineWidth = meme.lines[idx].lineWidth;
+  // const txtSize = meme.lines[idx].size;
+  // const lineWidth = meme.lines[idx].lineWidth;
+
+  const { size, txtSize, lineWidth } = meme.lines[idx];
 
   let x = 20;
   let y = getTextPose(idx);
@@ -129,16 +133,24 @@ function drawRect() {
     x = meme.lines[idx].pos.x;
     y = meme.lines[idx].pos.y;
   }
+  var fontsize = size;
+  var lineHeight = fontsize * 1.286;
+  // var textWidth = gCtx.measureText(text).width;
   gCtx.beginPath();
-  gCtx.rect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
+  gCtx.rect(x - 10, y - 10, lineWidth + 20, lineHeight + 20);
   gCtx.fillStyle = '#ffffff00';
+  // gCtx.rect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
+  // gCtx.fillStyle = '#ffffff00';
+  // gCtx.strokeRect(x - 10, y - 25, lineWidth + 20, txtSize + 20);
+
+  gCtx.strokeRect(x - 10, y - 10, lineWidth + 20, lineHeight + 20);
 
   gCtx.stroke();
   const boxBoundaries = {
     x: x - 10,
-    y: y - 25,
-    xWidth: lineWidth + 20 + x,
-    yHight: y + txtSize + 20,
+    y: y - 10,
+    xWidth: x + lineWidth + 20,
+    yHight: y + lineHeight + 20,
   };
   const txtPos = { x: x, y: y };
   saveTextPos(txtPos);

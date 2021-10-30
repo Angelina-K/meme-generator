@@ -129,10 +129,11 @@ a {
   grid-auto-rows: auto;
   grid-auto-flow: row dense;
   grid-gap: 5px;
+  margin: 0px;
 }
 .img {
   min-width: 165px;
-  height: auto;
+  /* height: auto; */
   /* opacity: 0.7; */
 }
 
@@ -233,9 +234,9 @@ footer {
 /* fullscreen */
 
 /* BIGGER GALLERY GAP IN FULL SCREEN */
-@media (max-width: 1020px) {
+@media (m-width: 1020px) {
   .main-layout {
-    margin-left: 52px;
-    margin-right: 52px;
+    margin-left: 3.25em;
+    margin-right: 3.25em;
   }
 }

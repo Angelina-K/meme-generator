@@ -67,6 +67,7 @@ function saveBoxSize(idx, boxBoundaries) {
 }
 
 function moveLine(dx, dy) {
+  console.log('moving line');
   gMeme.lines[gCurrLineIdx].pos.x += dx;
   gMeme.lines[gCurrLineIdx].pos.y += dy;
 }
@@ -82,8 +83,10 @@ function isLineClicked(clickedPos) {
     clickedPos.y >= boxBoundaries.y &&
     clickedPos.y <= boxBoundaries.yHight
   ) {
+    console.log('loneclicked');
     return true;
   } else {
+    console.log('!!!loneclicked');
     return false;
   }
 }
