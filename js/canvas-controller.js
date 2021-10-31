@@ -47,7 +47,6 @@ function changeCanvasContent() {
   if (imgFromInput) {
     img.src = imgFromInput;
   } else {
-    // img.src = `img/${meme.selectedImgId}.jpg`;
     img.src =
       gFilterBy === 'all'
         ? `img/${meme.selectedImgId}.jpg`
@@ -67,7 +66,24 @@ function changeCanvasContent() {
     ) {
       focusOnLine();
     }
+
+    if (meme.stickers.length) {
+      meme.stickers.forEach((sticker) => {
+        let stickerImg = new Image();
+        stickerImg.src = sticker.src;
+        gCtx.drawImage(stickerImg, sticker.pos.x, sticker.pos.y);
+        // updateStickerPos()
+      });
+    }
   };
+}
+
+function getCenterPos() {
+  const pos = {
+    x: gElCanvas.width / 2,
+    y: gElCanvas.height / 2,
+  };
+  return pos;
 }
 
 function renderImgFromInput(img) {

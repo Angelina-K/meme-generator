@@ -1,6 +1,7 @@
 'use strict';
 let gMems = [];
 let gCurrLineIdx = 0;
+let gCurrSticker = -1;
 
 let gFilterBy = 'all';
 
@@ -10,6 +11,7 @@ let gImgfromInput;
 let gMeme = {
   selectedImgId: 0,
   selectedLineIdx: 0,
+  stickers: [],
   lines: [
     {
       pos: 0,
@@ -46,6 +48,26 @@ function createTxtLine(txt = '') {
   gCurrLineIdx++;
   return line;
 }
+
+function addSticker(stickeriD, stickerPos) {
+  console.log('ADD:', stickerPos);
+  const sticker = {
+    id: stickeriD,
+    src: `img/icons/Layer ${stickeriD}.png`,
+    pos: stickerPos,
+    isDrag: false,
+  };
+  gMeme.stickers.push(sticker);
+  gCurrSticker++;
+}
+function updateStickerPos(pos) {
+  gMeme.stickers[gCurrSticker].pos = pos;
+}
+
+function setStickerDrag(value) {
+  gMeme.stickers[gCurrSticker].isDrag = value;
+}
+
 function changeFont(newFont) {
   gMeme.lines[gCurrLineIdx].font = newFont;
 }
@@ -113,6 +135,11 @@ function moveLine(dx, dy) {
   gMeme.lines[gCurrLineIdx].pos.x += dx;
   gMeme.lines[gCurrLineIdx].pos.y += dy;
 }
+function moveSticker(dx, dy) {
+  gMeme.stickers[gCurrSticker].pos.x += dx;
+  gMeme.stickers[gCurrSticker].pos.y += dy;
+}
+
 function removeLine() {
   if (!gMeme.lines[gCurrLineIdx].isFocus) return;
   gMeme.lines.splice(gCurrLineIdx, 1);
@@ -144,6 +171,16 @@ function isLineClicked(clickedPos) {
   } else {
     return false;
   }
+}
+
+function isStickerClicked(clickedPos) {
+  if (!gMeme.stickers.length) return;
+  const pos = gMeme.stickers[gCurrSticker].pos;
+  const distance = Math.sqrt(
+    (pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2
+  );
+  if (distance <= 70) return true;
+  return false;
 }
 
 function setLineDrag(isDrag) {

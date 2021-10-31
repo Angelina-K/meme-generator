@@ -1,5 +1,6 @@
 'use strict';
 let gStartPos;
+let gStickerStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
 
 function onSelectImg(imgId) {
@@ -83,9 +84,21 @@ function getEvPos(ev) {
 
 function onDown(ev) {
   const pos = getEvPos(ev);
-  if (!isLineClicked(pos)) return;
-  setLineDrag(true);
-  gStartPos = pos;
+  const isLine = isLineClicked(pos);
+  const isSticker = isStickerClicked(pos);
+  console.log(isSticker);
+  console.log('returned');
+  if (!isLine && !isSticker) return;
+  if (isLine) {
+    console.log('is line');
+    setLineDrag(true);
+    gStartPos = pos;
+  }
+  if (isSticker) {
+    console.log('setting line drag');
+    setStickerDrag(true);
+    gStickerStartPos = pos;
+  }
   document.body.style.cursor = 'grabbing';
 }
 
@@ -101,10 +114,21 @@ function onMove(ev) {
     moveLine(dx, dy);
     changeCanvasContent();
   }
+
+  if (meme.stickers.length && meme.stickers[gCurrSticker].isDrag) {
+    const pos = getEvPos(ev);
+    const dx = pos.x - gStickerStartPos.x;
+    const dy = pos.y - gStickerStartPos.y;
+    gStickerStartPos = pos;
+    moveSticker(dx, dy);
+    changeCanvasContent();
+  }
 }
 
 function onUp() {
   setLineDrag(false);
+  if (gMeme.stickers.length && gMeme.stickers[gCurrSticker].isDrag)
+    setStickerDrag(false);
   document.body.style.cursor = 'auto';
 }
 
@@ -205,5 +229,12 @@ function onChangeColor(input, colorType) {
 function onChangeFont(font) {
   console.log('changing font to', font);
   changeFont(font);
+  changeCanvasContent();
+}
+
+function onAddSticker(stickeriD) {
+  const stickerPos = getCenterPos();
+  console.log(stickerPos);
+  addSticker(stickeriD, stickerPos);
   changeCanvasContent();
 }
