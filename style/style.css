@@ -64,11 +64,30 @@ a {
   border: none;
   border-radius: 0.8em;
   cursor: pointer;
+  background-color: #fff;
+}
+.color-btn {
+  position: relative;
+}
+.color-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-container {
   background: #e3e3e3;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.gallery-inputs {
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.filter-list {
+  gap: 10px;
+}
+.filter-list li {
+  cursor: pointer;
 }
 .saved-memes {
   display: none;
@@ -92,21 +111,35 @@ a {
   border: none;
   text-align: center;
 }
-.txt-editor,
-.line-editor,
-.share {
+.gap {
   gap: 26px;
 }
+.font-btn {
+  padding: 0.2em 0.75em;
+  font-size: 20px;
+  width: max-content;
+  border: none;
+  border-radius: 0.6em;
+  cursor: pointer;
+}
+
 .share-btn,
-.download-btn {
+.download-btn,
+.save-btn {
   width: max-content;
   background: #ff7f00;
-  padding: 1em 0.75em;
+  font-size: 16px;
+  padding: 0.8em 0.75em;
   border: none;
   border-radius: 0.8em;
   color: #fff;
-  font-size: 20px;
   cursor: pointer;
+}
+
+.download-btn,
+.share-btn {
+  background: #afa79f;
+  cursor: auto;
 }
 .upload-img {
   text-align: center;
@@ -132,6 +165,17 @@ a {
   max-width: 500px;
 }
 input[type='file' i] {
+  opacity: 0;
+  border: none;
+  border-radius: 3px;
+  background: grey;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  top: 0px;
+  height: 100%;
+}
+input[type='color' i] {
   opacity: 0;
   border: none;
   border-radius: 3px;
@@ -218,6 +262,16 @@ footer {
   .btn {
     height: 60px;
     width: 60px;
+  }
+  .share-btn,
+  .download-btn,
+  .save-btn {
+    font-size: 20px;
+    padding: 1em 0.75em;
+  }
+  .font-btn {
+    padding: 1em 0.75em;
+    font-size: 20px;
   }
 }
 /* fullscreen */

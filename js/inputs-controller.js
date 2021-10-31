@@ -17,6 +17,8 @@ function onSelectImg(imgId) {
 
 function loadImgFromInput(ev, onImageReady) {
   addResizeListener();
+  let elGallery = document.querySelector('.gallery-container');
+  elGallery.style.display = 'none';
   var reader = new FileReader();
 
   reader.onload = function (event) {
@@ -114,12 +116,15 @@ function onShareImg() {
   uploadImg();
 }
 
-function onDownloadImg(elLink) {
-  saveMeme();
-  const canvas = getCanvas();
-  var imgContent = canvas.toDataURL('image/jpeg');
-  elLink.href = imgContent;
-}
+// function onDownloadImg(elLink) {
+//   // const meme = getCurrMeme();
+//   // console.log(meme.isForSave);
+//   // if (meme.isForSave) {
+//   const canvas = getCanvas();
+//   var imgContent = canvas.toDataURL('image/jpeg');
+//   elLink.href = imgContent;
+//   // }
+// }
 
 function onOpenSavedMems() {
   let elGallery = document.querySelector('.gallery-container');
@@ -147,6 +152,58 @@ function onSelectSaved() {
 }
 
 function onAlignText(side) {
-  updateTxtSide(side);
+  console.log('fix');
+  // updateTxtSide(side);
+  // changeCanvasContent();
+}
+
+function onSaveMeme() {
+  let elDownloadBtn = document.querySelector('.download-btn');
+  elDownloadBtn.setAttribute('download', 'my-meme.jpg');
+  elDownloadBtn.addEventListener('click', function onDownloadImg(event) {
+    const canvas = getCanvas();
+    var imgContent = canvas.toDataURL('image/png');
+    event.href = imgContent;
+  });
+  renderBtns();
+  saveMeme();
+}
+
+function renderBtns() {
+  let elDownloadBtn = document.querySelector('.download-btn');
+  elDownloadBtn.style.background = '#ff7f00';
+  elDownloadBtn.style.cursor = 'pointer';
+
+  let elShareBtn = document.querySelector('.share-btn');
+  elShareBtn.style.background = '#ff7f00';
+  elShareBtn.style.cursor = 'pointer';
+}
+
+function onFilterGallery(value) {
+  const filterBy = value.innerText.toLowerCase();
+  setFilterBy(filterBy);
+  renderGallery(filterBy);
+  // let str = (value.style.fontSize = 16 + 'px');
+  // let fontSize = parseInt(str.slice(0, 2));
+  value.style.fontSize = 20 + 'px';
+}
+
+function onOpenGallery() {
+  let elSavedMemes = document.querySelector('.saved-memes');
+  elSavedMemes.style.display = 'none';
+  document.querySelector('.meme-content').style.display = 'none';
+  let elGallery = document.querySelector('.gallery-container');
+  elGallery.style.display = 'flex';
+}
+
+function onChangeColor(input, colorType) {
+  console.log(input);
+  changeTxtColor(input, colorType);
+  changeCanvasContent();
+}
+
+function onChangeFont(font) {
+  console.log('changing font to', font);
+  changeFont(font);
   changeCanvasContent();
 }

@@ -18,7 +18,7 @@
     <header class="main-header main-layout flex align-center space-between">
       <div class="logo"><img src="img/icons/logo.png" alt="" /></div>
       <ul class="main-nav flex clean-list">
-        <li><a href="#">Gallery</a></li>
+        <li><a href="#" onclick="onOpenGallery()">Gallery</a></li>
         <li onclick="onOpenSavedMems()"><a href="#">My Memes</a></li>
         <li><a href="#">About</a></li>
       </ul>
@@ -31,9 +31,24 @@
         <h3></h3>
       </section>
       <section class="gallery-container main-layout flex col">
-        <div class="upload-img">
-          <input type="file" name="image" onchange="onImgInput(event)" />Upload
-          Image
+        <div class="gallery-inputs flex main-layout space-between align-center">
+          <section class="filter">
+            <ul class="filter-list flex row main-layout clean-list">
+              <li onclick="onFilterGallery(this)">All</li>
+              <li onclick="onFilterGallery(this)">Cute</li>
+              <li onclick="onFilterGallery(this)">Funny</li>
+              <li onclick="onFilterGallery(this)">Animals</li>
+              <li onclick="onFilterGallery(this)">Babies</li>
+              <li onclick="onFilterGallery(this)">Movies</li>
+            </ul>
+          </section>
+          <div class="upload-img">
+            <input
+              type="file"
+              name="image"
+              onchange="onImgInput(event)"
+            />Upload Image
+          </div>
         </div>
         <div class="image-gallery gallery main-layout"></div>
       </section>
@@ -45,7 +60,7 @@
             oninput="onTypeTxt(this.value)"
             placeholder="Write Something"
           />
-          <div class="line-editor flex row">
+          <div class="line-editor flex row gap">
             <button class="btn select" onclick="onSelectLine()">
               <img src="img/icons/updown.png" alt="" />
             </button>
@@ -56,14 +71,14 @@
               <img src="img/icons/trash.png" alt="" />
             </button> -->
           </div>
-          <div class="txt-editor flex row">
+          <div class="txt-editor flex row gap">
             <button class="btn font-up" onclick="onChangeFontSize(1)">
               <img src="img/icons/a+.png" alt="" />
             </button>
             <button class="btn font-down" onclick="onChangeFontSize(-1)">
               <img src="img/icons/a-.png" alt="" />
             </button>
-            <!-- <button class="btn txt-left" onclick="onAlignText('left')">
+            <button class="btn txt-left" onclick="onAlignText('left')">
               <img src="img/icons/align-to-left.png" alt="" />
             </button>
             <button class="btn txt-center" onclick="onAlignText('center')">
@@ -71,17 +86,38 @@
             </button>
             <button class="btn txt-right" onclick="onAlignText('right')">
               <img src="img/icons/align-to-right.png" alt="" />
-            </button> -->
+            </button>
           </div>
-          <div class="share flex row">
-            <a
-              href="#"
-              class="download-btn"
-              onclick="onDownloadImg(this)"
-              download="my-meme.jpg"
+          <div class="font-editor flex row gap">
+            <select
+              class="font-btn"
+              name="font"
+              id=""
+              onchange="onChangeFont(this.value)"
             >
-              Download
-            </a>
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Times">Times</option>
+              <option value="Courier">Courier</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Comic Sans">Comic Sans</option>
+            </select>
+            <button class="btn color-btn">
+              <input onchange="onChangeColor(this,'fillStyle')" type="color" />
+              <img class="btn" src="img/icons/colors.png" alt="" />
+            </button>
+            <button class="btn color-btn">
+              <input
+                onchange="onChangeColor(this,'strokeStyle')"
+                type="color"
+              />
+              <img src="img/icons/A@2x.png" alt="" />
+            </button>
+          </div>
+
+          <div class="share flex row gap">
+            <button class="save-btn" onclick="onSaveMeme()">Save</button>
+            <a href="#" class="download-btn"> Download </a>
 
             <button href="#" class="share-btn" onclick="onShareImg()">
               Share
@@ -99,7 +135,6 @@
       </div>
     </footer>
 
-    <script src="js/util-service.js"></script>
     <script src="js/storage-service.js"></script>
     <script src="js/upload-service.js"></script>
     <script src="js/meme-service.js"></script>

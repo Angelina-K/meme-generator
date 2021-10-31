@@ -24,13 +24,17 @@ function addTouchListeners() {
   gElCanvas.addEventListener('touchend', onUp);
 }
 
-function renderGallery() {
+function renderGallery(filterBy = 'all') {
   addGalleryImgs();
   const imgs = getAllImgs();
+  console.log('renderGallery', imgs);
   let elGallery = document.querySelector('.image-gallery');
+
   const srtHtml = imgs.map((img) => {
     const imgId = img.id;
-    const strImg = `<div class="img" onclick="onSelectImg(${imgId})"><img src="img/${imgId}.jpg" alt=""></div>`;
+    const url = img.url;
+
+    const strImg = `<div class="img" onclick="onSelectImg(${imgId})"><img src="${url}" alt=""></div>`;
     return strImg;
   });
 

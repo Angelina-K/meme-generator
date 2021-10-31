@@ -2,6 +2,8 @@
 let gMems = [];
 let gCurrLineIdx = 0;
 
+let gFilterBy = 'all';
+
 let gImgs = [];
 let gImgfromInput;
 
@@ -13,8 +15,10 @@ let gMeme = {
       pos: 0,
       txt: '',
       size: 40,
+      font: 'Impact',
       align: 'left',
       fillStyle: 'black',
+      strokeStyle: 'white',
       lineWidth: 0,
       isFocus: true,
       boxBoundaries: 0,
@@ -29,8 +33,10 @@ function createTxtLine(txt = '') {
     pos: 0,
     txt,
     size: 40,
+    font: 'Impact',
     align: 'left',
     fillStyle: 'black',
+    strokeStyle: 'white',
     lineWidth: 0,
     isFocus: true,
     boxBoundaries: 0,
@@ -40,14 +46,52 @@ function createTxtLine(txt = '') {
   gCurrLineIdx++;
   return line;
 }
+function changeFont(newFont) {
+  gMeme.lines[gCurrLineIdx].font = newFont;
+}
+function changeTxtColor(input, type) {
+  console.log(type);
+  const color = input.value;
+  gMeme.lines[gCurrLineIdx][type] = color;
+}
+function updateSaveStatus() {
+  gMeme.isForSave = true;
+}
+function setFilterBy(filterBy) {
+  gFilterBy = filterBy;
+}
 
 function addGalleryImgs() {
+  gImgs = [];
   let id = 0;
-  while (id < 18) {
+  let maxId = 18;
+
+  switch (gFilterBy) {
+    case 'cute':
+      maxId = 5;
+      break;
+    case 'funny':
+      maxId = 6;
+      break;
+    case 'animals':
+      maxId = 3;
+      break;
+    case 'babies':
+      maxId = 4;
+      break;
+    case 'movies':
+      maxId = 6;
+      break;
+  }
+
+  while (id < maxId) {
     id++;
-    const img = { id: id, url: `img/${id}.jpg`, keywords: [''] };
+    let url =
+      gFilterBy === 'all' ? `img/${id}.jpg` : `img/${gFilterBy}/${id}.jpg`;
+    const img = { id: id, url: url, keywords: [''] };
     gImgs.push(img);
   }
+  console.log(gImgs);
 }
 
 function setImgFromInput(img) {
@@ -123,6 +167,7 @@ function changeLineFocus() {
 }
 function unFocusLine() {
   gMeme.lines[gCurrLineIdx].isFocus = false;
+  gMeme.lines[gCurrLineIdx].boxBoundaries = 0;
 }
 
 function changeFontSize(sign) {
