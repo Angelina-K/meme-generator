@@ -5,6 +5,7 @@ function onInit() {
   renderGallery();
   renderCanvas();
   addListeners();
+  createFilters();
 }
 
 function addListeners() {
@@ -27,7 +28,6 @@ function addTouchListeners() {
 function renderGallery(filterBy = 'all') {
   addGalleryImgs();
   const imgs = getAllImgs();
-  console.log('renderGallery', imgs);
   let elGallery = document.querySelector('.image-gallery');
 
   const srtHtml = imgs.map((img) => {

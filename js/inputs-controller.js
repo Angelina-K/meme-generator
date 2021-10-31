@@ -2,6 +2,7 @@
 let gStartPos;
 let gStickerStartPos;
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend'];
+let gFilters = [];
 
 function onSelectImg(imgId) {
   addResizeListener();
@@ -182,15 +183,16 @@ function onAlignText(side) {
 }
 
 function onSaveMeme() {
+  saveMeme();
   let elDownloadBtn = document.querySelector('.download-btn');
-  elDownloadBtn.setAttribute('download', 'my-meme.jpg');
+
   elDownloadBtn.addEventListener('click', function onDownloadImg(event) {
     const canvas = getCanvas();
-    var imgContent = canvas.toDataURL('image/png');
+    var imgContent = canvas.toDataURL('image/jpg');
     event.href = imgContent;
   });
+  elDownloadBtn.setAttribute('download', 'my-meme.jpg');
   renderBtns();
-  saveMeme();
 }
 
 function renderBtns() {
@@ -209,6 +211,9 @@ function onFilterGallery(value) {
   renderGallery(filterBy);
   // let str = (value.style.fontSize = 16 + 'px');
   // let fontSize = parseInt(str.slice(0, 2));
+  // console.log(gFilters);
+  // const idx = gFilters.find(value);
+  // console.log(idx);
   value.style.fontSize = 20 + 'px';
 }
 
@@ -221,13 +226,11 @@ function onOpenGallery() {
 }
 
 function onChangeColor(input, colorType) {
-  console.log(input);
   changeTxtColor(input, colorType);
   changeCanvasContent();
 }
 
 function onChangeFont(font) {
-  console.log('changing font to', font);
   changeFont(font);
   changeCanvasContent();
 }
@@ -237,4 +240,20 @@ function onAddSticker(stickeriD) {
   console.log(stickerPos);
   addSticker(stickeriD, stickerPos);
   changeCanvasContent();
+}
+
+function _createFilters(sortBy) {
+  const filter = {
+    sortBy,
+    fontSize: 16,
+    timesClicked: 0,
+  };
+  gFilters.push(filter);
+}
+function createFilters() {
+  _createFilters('cute');
+  _createFilters('funny');
+  _createFilters('animals');
+  _createFilters('babies');
+  _createFilters('movies');
 }

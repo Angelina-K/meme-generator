@@ -205,14 +205,9 @@ function clearCanvas() {
 // }
 
 function saveMeme() {
-  // _prepareMemeForSave();
   unFocusLine();
-  // unFocusLine();
   changeCanvasContent();
-
-  const canvas = gElCanvas;
-
-  const imgData = getImgData(canvas);
+  const imgData = getImgData(gElCanvas);
   gSavedMems.push(imgData);
 
   saveAsImgToStorage('imgesDB', gSavedMems);

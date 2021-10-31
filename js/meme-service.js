@@ -113,7 +113,6 @@ function addGalleryImgs() {
     const img = { id: id, url: url, keywords: [''] };
     gImgs.push(img);
   }
-  console.log(gImgs);
 }
 
 function setImgFromInput(img) {
@@ -147,13 +146,12 @@ function removeLine() {
     createTxtLine();
     gCurrLineIdx = 0;
     return;
-  }
-  if (gCurrLineIdx === 1) {
+  } else if (gCurrLineIdx === 1) {
     gCurrLineIdx = 0;
-  }
-  if (gCurrLineIdx !== 1 && gCurrLineIdx === gMeme.lines.length - 1) {
+  } else if (gCurrLineIdx !== 1 && gCurrLineIdx === gMeme.lines.length - 1) {
     gCurrLineIdx--;
   }
+  gMeme.lines[gCurrLineIdx].isFocus = true;
 }
 
 function isLineClicked(clickedPos) {
